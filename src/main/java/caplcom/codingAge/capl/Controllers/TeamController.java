@@ -2,6 +2,7 @@ package caplcom.codingAge.capl.Controllers;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-//    @PostMapping("/create/Team")
-//    public Team createTeam(@RequestBody TeamRequest teamRequest){
-//        return teamService.createTeam(teamRequest);
-//    }
+    @PostMapping("/create/Team")
+    public Team createTeam(@RequestBody TeamRequest teamRequest){
+        return teamService.createTeam(teamRequest);
+    }
 
     @GetMapping("/getTeamById")
     public Team getTeamById(@RequestParam String teamId){

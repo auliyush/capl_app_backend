@@ -17,9 +17,9 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerRepository playerRepository;
     @Override
     public Player createPlayer(PlayerRequest playerRequest) {
-        if(!playerRepository.findByPlayerName(playerRequest.getPlayerName())){
-            if(!playerRepository.findByPlayerPhone(playerRequest.getPlayerPhone())){
-                if(!playerRepository.findByPlayerEmail(playerRequest.getPlayerEmail())){
+        if(playerRepository.findByPlayerName(playerRequest.getPlayerName()) == null){
+            if(playerRepository.findByPlayerPhone(playerRequest.getPlayerPhone()) == null){
+                if(playerRepository.findByPlayerEmail(playerRequest.getPlayerEmail()) == null){
                     Player player = getPlayer(playerRequest);
                     return playerRepository.save(player);
                 }

@@ -3,12 +3,13 @@ package caplcom.codingAge.capl.Services;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 
 import java.util.List;
 
 public interface TeamService {
-//    Team createTeam(TeamRequest teamRequest);
+    Team createTeam(TeamRequest teamRequest);
 
     Team getTeamById(String teamId);
 
