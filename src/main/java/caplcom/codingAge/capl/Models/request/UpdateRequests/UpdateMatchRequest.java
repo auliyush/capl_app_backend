@@ -13,4 +13,6 @@ public class UpdateMatchRequest {
     private double overs;
     private String tossWonTeamId;
     private String selectionOfTossWinningTeam;
+    private String manOfTheMatchPlayerId;
+    private boolean matchStatus;
 }

@@ -11,9 +11,4 @@ public interface PlayerService {
     Player getPlayerById(String playerId);
     List<Player> getListOfPlayer();
     Player saveUpdates(Player player);
-    String getEconomyRate(String playerId);
-    String getStikeRate(String playerId);
-
-    int getAllFoursByPlayerId(String playerId);
-    int getAllSixByPlayerId(String playerId);
 }

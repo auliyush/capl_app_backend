@@ -17,6 +17,18 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerRepository playerRepository;
     @Override
     public Player createPlayer(PlayerRequest playerRequest) {
+        if(!playerRepository.findByPlayerName(playerRequest.getPlayerName())){
+            if(!playerRepository.findByPlayerPhone(playerRequest.getPlayerPhone())){
+                if(!playerRepository.findByPlayerEmail(playerRequest.getPlayerEmail())){
+                    Player player = getPlayer(playerRequest);
+                    return playerRepository.save(player);
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Player getPlayer(PlayerRequest playerRequest) {
         Player player = new Player();
         player.setPlayerName(playerRequest.getPlayerName());
         player.setPlayerPhone(playerRequest.getPlayerPhone());
@@ -25,8 +37,9 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerDob(playerRequest.getPlayerDob());
         player.setPlayerAddress(playerRequest.getPlayerAddress());
         player.setPlayerType(playerRequest.getPlayerType());
-        return playerRepository.save(player);
+        return player;
     }
+
     @Override
     public Player getPlayerById(String playerId) {
         return playerRepository.findByPlayerId(playerId);
@@ -41,39 +54,5 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.save(player);
     }
 
-    @Override
-    public String getEconomyRate(String playerId) {
-        Player player = playerRepository.findByPlayerId(playerId);
-        if(player != null){
-            int totalBalls = Integer.parseInt(player.getTotalBalls());
-            double totalOvers = totalBalls / 6.0;
-            int totalRuns = Integer.parseInt(player.getTotalRuns());
-            double economyRate = totalRuns / totalOvers;
-            return  Double.toString(economyRate);
-        }
-        return null;
-    }
-
-    @Override
-    public String getStikeRate(String playerId) {
-        Player player = playerRepository.findByPlayerId(playerId);
-        if (player != null){
-            int totalRuns = Integer.parseInt(player.getTotalRuns());
-            int totalBalls = Integer.parseInt(player.getTotalBalls());
-            double strikeRate = (double) totalRuns / totalBalls *100;
-            return  Double.toString(strikeRate);
-        }
-        return null;
-        }
-    public int getAllFoursByPlayerId(String playerId) {
-        Player player=getPlayerById(playerId);
-        return player.getTotalFours();
-    }
-
-    @Override
-    public int getAllSixByPlayerId(String playerId) {
-        Player player=getPlayerById(playerId);
-        return player.getTotalSixes();
-    }
 }
 

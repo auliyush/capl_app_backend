@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection ="Match")
 @Getter
 @Setter
@@ -21,8 +23,10 @@ public class Match {
     private Integer matchDate;
     private Integer matchTime;
     private double overs;
+    private boolean matchStatus;
     private String tossWonTeamId;
     private String selectionOfTossWinningTeam;
+    private String manOfTheMatchPlayerId;
     private ScoreBoard scoreBoard;
-    // List<TeamStats> need here
+    private List<Stats> players;
 }

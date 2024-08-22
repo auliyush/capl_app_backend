@@ -28,4 +28,8 @@ public class MatchController {
     public List<Match> getMatchesByTeamId(@RequestParam String teamId){
         return matchService.getMatchesByTeamId(teamId);
     }
+    @PutMapping("/update/match")
+    public Match updateMatch(@RequestParam String matchId){
+        return matchService.updateMatch(matchId);
+    }
 }

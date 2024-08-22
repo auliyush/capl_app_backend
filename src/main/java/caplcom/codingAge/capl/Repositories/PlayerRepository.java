@@ -8,4 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlayerRepository extends MongoRepository<Player, String> {
     Player findByPlayerId(String playerId);
+
+    boolean findByPlayerName(String playerName);
+
+    boolean findByPlayerPhone(String playerPhone);
+
+    boolean findByPlayerEmail(String playerEmail);
 }
