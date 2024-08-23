@@ -92,7 +92,7 @@ public class TeamServiceImpl implements TeamService {
             for(Player player : getListOfPlayers(teamId)){
                 if(player.getPlayerId().equals(playerId)){
                    getListOfPlayers(teamId).remove(player);
-                   teamRepository.save(team);
+                   saveUpdates(team);
                     return true;
                 }
             }

@@ -19,7 +19,6 @@ public class Match {
     private String creatorId;
     private String  firstTeamId;
     private String secondTeamId;
-    //  Convert this Integer to Date and Time
     private Integer matchDate;
     private Integer matchTime;
     private double overs;

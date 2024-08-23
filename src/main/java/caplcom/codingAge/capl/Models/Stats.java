@@ -20,7 +20,6 @@ import java.util.List;
 public class Stats {
     @Id
     private String statsId;
-
     private String matchId;
     private String teamId;
     private String playerId;

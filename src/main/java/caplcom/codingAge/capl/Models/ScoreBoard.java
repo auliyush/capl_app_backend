@@ -26,7 +26,6 @@ public class ScoreBoard {
     private int totalRuns;
     private double overs;
     private int noOfWickets;
-
     private List <Stats> statsList=new ArrayList<>();
     private List <Extras> extrasList=new ArrayList<>();
 
