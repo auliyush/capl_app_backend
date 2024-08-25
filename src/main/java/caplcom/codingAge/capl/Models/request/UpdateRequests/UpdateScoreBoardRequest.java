@@ -10,6 +10,7 @@ import lombok.Setter;
 public class UpdateScoreBoardRequest {
 
     private String scoreboardId;
+    private boolean inning;
     private String strikerId;
     private String nonStrikerId;
     private String bowlerId;

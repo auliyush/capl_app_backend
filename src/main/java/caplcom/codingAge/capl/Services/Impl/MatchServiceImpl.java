@@ -1,9 +1,9 @@
 package caplcom.codingAge.capl.Services.Impl;
 
-import caplcom.codingAge.capl.Models.Match;
-import caplcom.codingAge.capl.Models.Stats;
-import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.*;
 import caplcom.codingAge.capl.Models.request.CreateRequests.MatchRequest;
+import caplcom.codingAge.capl.Models.request.CreateRequests.MatchResultRequest;
+import caplcom.codingAge.capl.Models.request.CreateRequests.ScoreBoardRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchRequest;
 import caplcom.codingAge.capl.Repositories.MatchRepository;
 import caplcom.codingAge.capl.Services.*;
@@ -25,7 +25,10 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     private TeamService teamService;
     @Autowired
-    private StatsService statsService;
+    private MatchResultService matchResultService;
+    @Autowired
+    private ScoreBoardService scoreBoardService;
+
     @Override
     public Match createMatch(MatchRequest matchRequest) {
         if (userService.getUserByUserId(matchRequest.getCreatorId()) != null) {
@@ -37,6 +40,8 @@ public class MatchServiceImpl implements MatchService {
                 teamService.saveUpdates(firstTeam);
                 secondTeam.getMatchList().add(match);
                 teamService.saveUpdates(secondTeam);
+                scoreBoardService.createScoreBoard(match.getMatchId(), match.getFirstTeamId());
+                scoreBoardService.createScoreBoard(match.getMatchId(), match.getSecondTeamId());
                 return matchRepository.save(match);
             }
         }
@@ -49,12 +54,14 @@ public class MatchServiceImpl implements MatchService {
                 teamService.saveUpdates(firstTeam);
                 secondTeam.getMatchList().add(match);
                 teamService.saveUpdates(secondTeam);
+               scoreBoardService.createScoreBoard(match.getMatchId(), match.getFirstTeamId());
+               scoreBoardService.createScoreBoard(match.getMatchId(), match.getSecondTeamId());
                 return matchRepository.save(match);
             }
         }
         return null;
     }
-
+// this is static method only for create match
     private static Match getMatch(MatchRequest matchRequest) {
         Match match = new Match();
         match.setCreatorId(matchRequest.getCreatorId());
@@ -101,35 +108,7 @@ public class MatchServiceImpl implements MatchService {
         if(match.isMatchStatus()){
            return null;
         }
-        int highestRunPlayer1 = -99;
-        int highestWicketPlayer1 = -99;
-        int highestRunPlayer2 = -99;
-        int highestWicketPlayer2 = -99;
-        String highestRunPlayer = "";
-        String highestWicketPlayer = "";
-        for(Stats stats : match.getPlayers()){
-            if (stats.getTotalRuns() > highestRunPlayer1){
-                highestRunPlayer1 = stats.getTotalRuns();
-                highestWicketPlayer1 = stats.getWickets().size();
-                highestRunPlayer = stats.getPlayerId();
-            }
-            if(stats.getWickets().size() > highestWicketPlayer2){
-                highestWicketPlayer2 = stats.getWickets().size();
-                highestRunPlayer2 = stats.getTotalRuns();
-                highestWicketPlayer = stats.getPlayerId();
-            }
-        }
-        highestRunPlayer1 = highestRunPlayer1 + (highestWicketPlayer1 * 20);
-        highestRunPlayer2 = highestRunPlayer2 + (highestWicketPlayer2 * 20);
-        if(!Objects.equals(highestRunPlayer, highestWicketPlayer)){
-            if(highestRunPlayer1 > highestRunPlayer2){
-                match.setManOfTheMatchPlayerId(highestRunPlayer);
-            }else {
-                match.setManOfTheMatchPlayerId(highestWicketPlayer);
-            }
-        }else {
-            match.setManOfTheMatchPlayerId(highestRunPlayer);
-        }
+        matchResultService.createMatchResult(match);
         return matchRepository.save(match);
     }
 

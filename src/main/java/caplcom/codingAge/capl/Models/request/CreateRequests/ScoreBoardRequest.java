@@ -10,11 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ScoreBoardRequest {
 
-    private String firstTeamId;
-    private String secondTeamId;
-    private String strikerId;
-    private String nonStrikerId;
-    private String bowlerId;
+    private String teamId;
     private int totalRuns;
     private double overs;
     private int noOfWickets;

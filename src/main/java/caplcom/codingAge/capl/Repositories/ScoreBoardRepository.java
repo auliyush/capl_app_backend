@@ -9,9 +9,7 @@ import java.util.List;
 @Repository
 public interface ScoreBoardRepository extends MongoRepository <ScoreBoard, String> {
 
-    ScoreBoard findByFirstTeamId (String firstTeamId);
-
-    List<ScoreBoard> findAllByFirstTeamId(String firstTeamId);
+    List<ScoreBoard> findAllByMatchId(String firstTeamId);
 
     ScoreBoard findByMatchId(String matchId);
 }

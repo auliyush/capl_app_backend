@@ -14,4 +14,6 @@ public interface StatsService {
     Stats updateStats(UpdateStats updateStats);
 
     List<Stats> getAll();
+
+    boolean addPlayersRunInStat(String playerId, String matchId);
 }

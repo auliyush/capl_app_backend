@@ -17,23 +17,19 @@ public class MatchResultController {
     @Autowired
     MatchResultService matchResultService;
 
+
     @GetMapping("/byMatchId")
-    MatchResult getMatchById(String matchId) {
-        return matchResultService.getMatchById(matchId);
+    MatchResult getMatchResultByMatchId(String matchId) {
+        return matchResultService.getMatchResultByMatchId(matchId);
     }
 
     @GetMapping("/lists")
-    List<MatchResult> getMatchByTeamId(String teamId) {
+    List<MatchResult> getMatchResultByTeamId(String teamId) {
         return matchResultService.getMatchByTeamId(teamId);
-    }
-
-    @PostMapping("/create")
-    MatchResult createMatchResult(MatchResultRequest matchResultRequest) {
-        return matchResultService.createMatchResult(matchResultRequest);
     }
 
     @PutMapping("/update")
     MatchResult editMatchResult(UpdateMatchResult updateMatchResult) {
-        return matchResultService.editMatchResult(updateMatchResult);
+        return matchResultService.updateMatchResult(updateMatchResult);
     }
 }

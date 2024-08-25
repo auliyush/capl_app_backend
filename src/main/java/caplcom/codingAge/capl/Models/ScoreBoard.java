@@ -18,12 +18,13 @@ public class ScoreBoard {
     @Id
     private String id;
     private String matchId;
-    private String firstTeamId;
-    private String secondTeamId;
+    private String teamId;
+    private boolean inning;
     private String strikerId;
     private String nonStrikerId;
     private String bowlerId;
     private int totalRuns;
+    private int totalWickets;
     private double overs;
     private int noOfWickets;
     private List <Stats> statsList=new ArrayList<>();

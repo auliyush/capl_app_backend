@@ -18,9 +18,9 @@ import java.util.Optional;
 public class StatsServiceImpl implements StatsService {
     @Autowired
     private StatsRepository statsRepository;
-
     @Autowired
     private PlayerService playerService;
+
     @Override
     public Stats createStats(StatsRequest statsRequest) {
         Player player = playerService.getPlayerById(statsRequest.getPlayerId());
@@ -29,12 +29,6 @@ public class StatsServiceImpl implements StatsService {
             stats.setMatchId(statsRequest.getMatchId());
             stats.setTeamId(statsRequest.getTeamId());
             stats.setPlayerId(statsRequest.getPlayerId());
-            stats.setTotalRuns(statsRequest.getTotalRuns());
-            stats.setStrikeRate(statsRequest.getStrikeRate());
-            stats.setEconomyRate(statsRequest.getEconomyRate());
-            stats.setTotalBalls(statsRequest.getTotalBalls());
-            stats.setTotalFours(statsRequest.getTotalFours());
-            stats.setTotalSix(statsRequest.getTotalSix());
             return statsRepository.save(stats);
         }
         else{
@@ -66,6 +60,11 @@ public class StatsServiceImpl implements StatsService {
             return statsRepository.save(stats1);
         }
         return new Stats();
+    }
+
+    @Override
+    public boolean addPlayersRunInStat(String playerId, String matchId) {
+        return false;
     }
 
     @Override

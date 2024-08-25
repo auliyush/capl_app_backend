@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface ScoreBoardService {
 
-    ScoreBoard createScoreBoard(ScoreBoardRequest scoreBoardRequest);
+    ScoreBoard createScoreBoard(String matchId, String teamId);
 
     ScoreBoard getScoreBoardById(String scoreBoardId);
 
-    ScoreBoard getScoreBoardByTeamId(String firstTeamId,String secondTeamId);
+    ScoreBoard getScoreBoardByMatchAndTeamId(String teamId, String matchId);
 
     ScoreBoard editScoreBoard(UpdateScoreBoardRequest updateScoreBoardRequest);
 
     List<ScoreBoard> getListOfScoreBoard();
-    ScoreBoard addExtrasByMatchId(Extras extras);
+    void addRuns(String scoreBoardId, int run);
 }

@@ -8,9 +8,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Time;
-import java.util.Date;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,14 +15,15 @@ import java.util.Date;
 @Document(collection ="MatchResult")
 public class MatchResult {
     @Id
-    private String id;
+    private String matchResultId;
     private String matchId;
     private String tournamentId;
     private String firstTeamId;
     private String secondTeamId;
-    private Date matchDate;
-    private Time matchTime;
-    private String tossWon;
-    private String tossSelected;
-    private ScoreBoard ScoreCard;
+    private Integer firstTeamTotalRuns;
+    private Integer secondTeamTotalRuns;
+    private Integer firstTeamTotalWickets;
+    private Integer secondTeamTotalWickets;
+    private String winnerTeamId;
+    private String manOfTheMatchId;
 }

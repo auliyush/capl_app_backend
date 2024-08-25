@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UserRequest {
-
     private String userName;
     private String userPhone;
     private String userEmail;

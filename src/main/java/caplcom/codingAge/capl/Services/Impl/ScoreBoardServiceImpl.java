@@ -17,16 +17,10 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     @Autowired
     private ScoreBoardRepository scoreBoardRepository;
 
-    public ScoreBoard createScoreBoard(ScoreBoardRequest scoreBoardRequest){
+    public ScoreBoard createScoreBoard(String matchId, String teamId){
         ScoreBoard scoreBoard = new ScoreBoard();
-        scoreBoard.setFirstTeamId(scoreBoardRequest.getFirstTeamId());
-        scoreBoard.setSecondTeamId(scoreBoardRequest.getSecondTeamId());
-        scoreBoard.setStrikerId(scoreBoardRequest.getStrikerId());
-        scoreBoard.setNonStrikerId(scoreBoardRequest.getNonStrikerId());
-        scoreBoard.setBowlerId(scoreBoardRequest.getBowlerId());
-        scoreBoard.setTotalRuns(scoreBoardRequest.getTotalRuns());
-        scoreBoard.setOvers(scoreBoardRequest.getOvers());
-        scoreBoard.setNoOfWickets(scoreBoardRequest.getNoOfWickets());
+        scoreBoard.setTeamId(teamId);
+        scoreBoard.setMatchId(matchId);
         return scoreBoardRepository.save(scoreBoard);
     }
 
@@ -35,12 +29,11 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         return scoreBoardRepository.findById(scoreBoardId).orElse(null);
     }
 
-
     @Override
-    public ScoreBoard getScoreBoardByTeamId(String firstTeamId, String secondTeamId) {
-        List <ScoreBoard> scoreBoardList = scoreBoardRepository.findAllByFirstTeamId(firstTeamId);
+    public ScoreBoard getScoreBoardByMatchAndTeamId(String teamId,String matchId) {
+        List <ScoreBoard> scoreBoardList = scoreBoardRepository.findAllByMatchId(matchId);
         for (ScoreBoard scoreBoard : scoreBoardList){
-            if (scoreBoard.getSecondTeamId().equals(secondTeamId)){
+            if(scoreBoard.getTeamId().equals(teamId)){
                 return scoreBoard;
             }
         }
@@ -49,7 +42,6 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
 
     @Override
     public ScoreBoard editScoreBoard(UpdateScoreBoardRequest updateScoreBoardRequest) {
-
         ScoreBoard scoreBoard =scoreBoardRepository.findById(updateScoreBoardRequest.getScoreboardId()).get();
         if (scoreBoard != null){
                 scoreBoard.setStrikerId(updateScoreBoardRequest.getStrikerId());
@@ -61,20 +53,15 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         }
         return null;
     }
-
+    @Override
+    public void addRuns(String scoreBoardId, int run) {
+        ScoreBoard scoreBoard = scoreBoardRepository.findById(scoreBoardId).orElse(null);
+         if(scoreBoard != null){
+             scoreBoard.setTotalRuns(scoreBoard.getTotalRuns()+run);
+         }
+    }
     @Override
     public List<ScoreBoard> getListOfScoreBoard() {
         return scoreBoardRepository.findAll();
-    }
-
-    @Override
-    public ScoreBoard addExtrasByMatchId(Extras extras) {
-        ScoreBoard scoreBoard=scoreBoardRepository.findByMatchId(extras.getMatchId());
-        if(scoreBoard!=null)
-        {
-            scoreBoard.getExtrasList().add(extras);
-            scoreBoardRepository.save(scoreBoard);
-        }
-        return null;
     }
 }

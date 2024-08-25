@@ -37,5 +37,10 @@ public class StatsController {
         return statsService.getAll();
     }
 
+    @PutMapping("/add/Run")
+    public boolean addPlayersRunInStat(@RequestParam String playerId, String matchId){
+        return statsService.addPlayersRunInStat(playerId,matchId);
+    }
+
 
 }

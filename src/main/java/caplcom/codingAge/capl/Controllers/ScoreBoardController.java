@@ -18,10 +18,11 @@ public class ScoreBoardController {
     @Autowired
     private ScoreBoardService scoreBoardService;
 
-    @PostMapping("/create/scoreboard")
-    public ScoreBoard createScoreBoard (@RequestBody ScoreBoardRequest scoreBoardRequest){
-        return scoreBoardService.createScoreBoard (scoreBoardRequest);
-    }
+    //don't need create api for user
+//    @PostMapping("/create/scoreboard")
+//    public ScoreBoard createScoreBoard (@RequestBody ScoreBoardRequest scoreBoardRequest){
+//        return scoreBoardService.createScoreBoard (scoreBoardRequest);
+//    }
 
     @GetMapping("/get/scoreboardById")
     public ScoreBoard getScoreBoardById (@RequestParam String scoreBoardId){
@@ -29,8 +30,8 @@ public class ScoreBoardController {
     }
 
     @GetMapping("/get/scoreboardTeamById")
-    public ScoreBoard getScoreBoardByTeamId(@RequestParam String firstTeamId , String secondTeamId){
-        return scoreBoardService.getScoreBoardByTeamId(firstTeamId,secondTeamId);
+    public ScoreBoard getScoreBoardByMatchAndTeamId(@RequestParam String teamId, String matchId){
+        return scoreBoardService.getScoreBoardByMatchAndTeamId(teamId, matchId);
     }
 
     @PutMapping("/update/scoreboard")
