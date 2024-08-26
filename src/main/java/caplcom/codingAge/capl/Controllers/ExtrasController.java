@@ -29,10 +29,12 @@ public class ExtrasController {
         return extrasService.getExtrasByTeamId(teamId);
     }
 
-    @PutMapping("/update")
-    Extras updateExtrasById(UpdateExtras updateExtras) {
-        return extrasService.updateExtrasById(updateExtras);
-    }
+//    @PutMapping("/update")
+//    Extras updateExtrasById(UpdateExtras updateExtras) {
+//        return extrasService.updateExtrasById(updateExtras);
+//    }
+
+    // there is no need of update extras
 }
 
 // i haven't checked it yet

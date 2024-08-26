@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BowlerStatRepository extends MongoRepository<BowlerStat, String> {
 
+    BowlerStat findByStatId(String bowlerId);
 }

@@ -30,12 +30,32 @@ public class BowlerStatServiceImpl implements BowlerStatService {
     }
 
     @Override
-    public boolean addExtraRunInBowlerStats(Integer extraRun, BowlerStat bowler) {
-        bowler.setTotalRuns(extraRun);
+    public boolean addExtraRunInBowlerStats(Integer extraRun, String bowlerId) {
+        BowlerStat bowlerStat = getBowlerStatById(bowlerId);
+        bowlerStat.setTotalRuns(bowlerStat.getTotalRuns() + extraRun);
         if(extraRun == 4){
-            bowler.setTotalFours(bowler.getTotalFours() + 1);
+            bowlerStat.setTotalFours(bowlerStat.getTotalFours() + 1);
         } else if (extraRun == 6) {
-            bowler.setTotalSix(bowler.getTotalSix() + 1);
+            bowlerStat.setTotalSix(bowlerStat.getTotalSix() + 1);
         }
+        bowlerStatRepository.save(bowlerStat);
+        return true;
+    }
+    @Override
+    public BowlerStat getBowlerStatById(String bowlerId) {
+        return bowlerStatRepository.findByStatId(bowlerId);
+    }
+
+    @Override
+    public boolean addRunInBowler(String bowlerId, Integer run) {
+        BowlerStat bowlerStat = getBowlerStatById(bowlerId);
+        bowlerStat.setTotalRuns(bowlerStat.getTotalRuns() + run);
+        if(run == 4){
+            bowlerStat.setTotalFours(bowlerStat.getTotalFours() + 1);
+        } else if (run == 6) {
+            bowlerStat.setTotalSix(bowlerStat.getTotalSix() + 1);
+        }
+        bowlerStatRepository.save(bowlerStat);
+        return true;
     }
 }

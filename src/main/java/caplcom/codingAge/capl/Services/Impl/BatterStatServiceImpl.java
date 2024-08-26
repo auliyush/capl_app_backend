@@ -31,7 +31,6 @@ public class BatterStatServiceImpl implements BatterStatService {
             return null;
         }
     }
-
     @Override
     public BatterStat getBatterStatByPlayerId(String playerId, String scoreBoardId) {
         List<BatterStat> batterStatList = batterStatRepository.findAllByScoreBoardId(scoreBoardId);
@@ -41,5 +40,27 @@ public class BatterStatServiceImpl implements BatterStatService {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean addRunInStriker(String strikerId, int run) {
+        BatterStat batterStat = getStatById(strikerId);
+        batterStat.setTotalRuns(batterStat.getTotalRuns() + run);
+        if(run == 4){
+            batterStat.setTotalFours(batterStat.getTotalFours() + 1);
+        } else if (run == 6) {
+            batterStat.setTotalSix(batterStat.getTotalSix() + 1);
+        }
+        saveUpdates(batterStat);
+        return true;
+    }
+
+    public BatterStat getStatById(String statId) {
+        return batterStatRepository.findByStatId(statId);
+    }
+
+    @Override
+    public BatterStat saveUpdates(BatterStat batterStat) {
+        return batterStatRepository.save(batterStat);
     }
 }

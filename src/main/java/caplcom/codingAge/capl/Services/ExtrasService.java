@@ -13,5 +13,6 @@ public interface ExtrasService {
 
     List<Extras> getExtrasByTeamId(String teamId);
 
-    Extras updateExtrasById(UpdateExtras updateExtras);
+//    Extras updateExtrasById(UpdateExtras updateExtras);
+// there is no need of update extras
 }

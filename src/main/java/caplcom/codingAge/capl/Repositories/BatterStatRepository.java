@@ -10,4 +10,6 @@ import java.util.List;
 public interface BatterStatRepository extends MongoRepository<BatterStat, String> {
 
     List<BatterStat> findAllByScoreBoardId(String scoreBoardId);
+
+    BatterStat findByStatId(String statId);
 }

@@ -89,8 +89,8 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
             scoreBoard.setTotalRuns(scoreBoard.getTotalRuns() + extras.getExtraRun());
             scoreBoard.getExtrasList().add(extras);
             for(BowlerStat bowlerStat : scoreBoard.getBowlerStatList()){
-                if(bowlerStat.getPlayerId().equals(scoreBoard.getBowlerId())){
-                    bowlerStatService.addExtraRunInBowlerStats(extras.getExtraRun(), bowlerStat);
+                if(bowlerStat.getStatId().equals(scoreBoard.getBowlerId())){
+                    bowlerStatService.addExtraRunInBowlerStats(extras.getExtraRun(), bowlerStat.getStatId());
                     return true;
                 }
             }
@@ -99,13 +99,14 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     }
 
     @Override
-    public void addRuns(String scoreBoardId, int run) {
+    public boolean addRuns(String scoreBoardId, Integer run) {
         ScoreBoard scoreBoard = scoreBoardRepository.findById(scoreBoardId).orElse(null);
          if(scoreBoard != null){
              scoreBoard.setTotalRuns(scoreBoard.getTotalRuns()+run);
          }
-         batterStatService.createInningBatterStats()
-         batterStatService.addRunInStriker(scoreBoard.get)
+         batterStatService.addRunInStriker(scoreBoard.getStrikerId(),run);
+         bowlerStatService.addRunInBowler(scoreBoard.getBowlerId(), run);
+         return true;
     }
     @Override
     public List<ScoreBoard> getListOfScoreBoard() {

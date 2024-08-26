@@ -20,6 +20,7 @@ public class Season {
     private String seasonId;
     private String seasonYear;
     private List<Tournament> tournamentList = new ArrayList<>();
-    private List<Stats> statsList = new ArrayList<>();
+    private List<BatterStat> batterStatList = new ArrayList<>();
+    private List<BowlerStat> bowlerStatList = new ArrayList<>();
     private List<Match> matchList =new ArrayList<>();
 }

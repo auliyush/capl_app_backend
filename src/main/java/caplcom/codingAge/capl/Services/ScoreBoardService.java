@@ -18,5 +18,5 @@ public interface ScoreBoardService {
 
     boolean addExtrasRun(Extras extras);
     List<ScoreBoard> getListOfScoreBoard();
-    void addRuns(String scoreBoardId, int run);
+    boolean addRuns(String scoreBoardId, Integer run);
 }

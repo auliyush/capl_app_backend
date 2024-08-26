@@ -49,16 +49,18 @@ public class ExtrasServiceImpl implements ExtrasService {
         return new ArrayList<>();
     }
 
-    @Override
-    public Extras updateExtrasById(UpdateExtras updateExtras) {
-        Extras extras = extrasRepository.findById(updateExtras.getId()).get();
-        if (extras != null) {
-            extras.setTeamId(updateExtras.getTeamId());
-            extras.setWideRun(updateExtras.getWideRun());
-            extras.setLegByRun(updateExtras.getLegByRun());
-            return extrasRepository.save(extras);
-        }
 
-        return new Extras();
-    }
+    // there is no need of update extras
+//    @Override
+//    public Extras updateExtrasById(UpdateExtras updateExtras) {
+//        Extras extras = extrasRepository.findById(updateExtras.getId()).get();
+//        if (extras != null) {
+//            extras.setTeamId(updateExtras.getTeamId());
+//            extras.setWideRun(updateExtras.getWideRun());
+//            extras.setLegByRun(updateExtras.getLegByRun());
+//            return extrasRepository.save(extras);
+//        }
+//
+//        return new Extras();
+//    }
 }
