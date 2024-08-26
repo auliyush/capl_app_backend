@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TeamRequest {
-    private String teamCreatorId;
-    private String teamName;
-    private String teamNickName;
-    private String teamProfilePhotoUrl;
+public class AddPlayerRequest {
+   private String teamId;
+   private String playerId;
+   private String creatorId;
+   private Integer jerseyNumber;
 }

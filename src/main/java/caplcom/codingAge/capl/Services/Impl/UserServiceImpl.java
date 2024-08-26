@@ -13,8 +13,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Override
-    public User signUp(UserRequest userRequest) {
+    public User createUser(UserRequest userRequest) {
         User user = new User();
         user.setUserName(userRequest.getUserName());
         user.setUserEmail(userRequest.getUserEmail());
@@ -23,10 +24,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public User getByEmail(String userEmail) {
+        return userRepository.findByUserEmail(userEmail);
+    }
+
     @Override
     public boolean signIn(String userPhone, String userPassword) {
         User user = userRepository.findByUserPhone(userPhone);
-        if(user != null){
+        if (user != null) {
             return user.getUserPassword().equals(userPassword);
         }
         return false;
@@ -35,6 +40,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUserId(String userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public User getByPhoneNumber(String phoneNumber) {
+        return userRepository.findByUserPhone(phoneNumber);
     }
 
     @Override

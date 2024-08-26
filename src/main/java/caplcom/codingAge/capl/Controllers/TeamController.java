@@ -2,6 +2,7 @@ package caplcom.codingAge.capl.Controllers;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Services.TeamService;
@@ -43,8 +44,8 @@ public class TeamController {
     }
 
     @PutMapping("/add/player")
-    public boolean addPlayerInTeam(@RequestParam String teamId, String playerId, String creatorId){
-        return teamService.addPlayerInTeam(teamId, playerId, creatorId);
+    public boolean addPlayerInTeam(@RequestBody AddPlayerRequest addPlayerRequest){
+        return teamService.addPlayerInTeam(addPlayerRequest);
     }
     @PutMapping("/remove/player")
     public boolean removePlayerFromTeam(@RequestParam String teamId, String playerId, String creatorId){

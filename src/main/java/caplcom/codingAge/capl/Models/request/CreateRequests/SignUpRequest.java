@@ -7,9 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TeamRequest {
-    private String teamCreatorId;
-    private String teamName;
-    private String teamNickName;
-    private String teamProfilePhotoUrl;
+public class SignUpRequest {
+    private String userName;
+    private String userPhone;
+    private String userEmail;
+    private String userPassword;
+    private String userRole;
 }

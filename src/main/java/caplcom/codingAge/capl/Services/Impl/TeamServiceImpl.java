@@ -3,6 +3,7 @@ package caplcom.codingAge.capl.Services.Impl;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Repositories.TeamRepository;
@@ -32,6 +33,7 @@ public class TeamServiceImpl implements TeamService {
             team.setTeamCreatorId(teamRequest.getTeamCreatorId());
             team.setTeamName(teamRequest.getTeamName());
             team.setTeamNickName(teamRequest.getTeamNickName());
+            team.setTeamProfilePhotoUrl(teamRequest.getTeamProfilePhotoUrl());
             return teamRepository.save(team);
         }
         return null;
@@ -70,14 +72,15 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean addPlayerInTeam(String teamId, String playerId, String creatorId) {
-        Team team = getTeamById(teamId);
-        if(team != null && team.getTeamCreatorId().equals(creatorId)){
-            Player player = playerService.getPlayerById(playerId);
+    public boolean addPlayerInTeam(AddPlayerRequest addPlayerRequest) {
+        Team team = getTeamById(addPlayerRequest.getTeamId());
+        if(team != null && team.getTeamCreatorId().equals(addPlayerRequest.getCreatorId())){
+            Player player = playerService.getPlayerById(addPlayerRequest.getPlayerId());
             if(player != null){
                 if (team.getPlayerList() == null) {
                     team.setPlayerList(new ArrayList<>());
                 }
+                player.setJerseyNumber(addPlayerRequest.getJerseyNumber());
                 team.getPlayerList().add(player);
                 teamRepository.save(team);
                 return true;
@@ -90,9 +93,11 @@ public class TeamServiceImpl implements TeamService {
     public boolean removePlayerFromTeam(String teamId, String playerId, String creatorId) {
         Team team = getTeamById(teamId);
         if(team != null && team.getTeamCreatorId().equals(creatorId)){
-            for(Player player : getListOfPlayers(teamId)){
+            List<Player> playerList = getListOfPlayers(teamId);
+            for(Player player : playerList){
                 if(player.getPlayerId().equals(playerId)){
-                   getListOfPlayers(teamId).remove(player);
+                   playerList.remove(player);
+                   team.setPlayerList(playerList);
                    saveUpdates(team);
                     return true;
                 }

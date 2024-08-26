@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AdminUser {
     @Id
     private String adminId;
-    private String userName;
-    private String userPhone;
-    private String userEmail;
-    private String userPassword;
-    private String userProfilePhotoUrl;
+    private String adminName;
+    private String adminPhone;
+    private String adminEmail;
+    private String adminPassword;
+    private String adminProfilePhotoUrl;
 }

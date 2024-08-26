@@ -3,6 +3,7 @@ package caplcom.codingAge.capl.Services;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
+import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 
@@ -19,7 +20,7 @@ public interface TeamService {
 
     List<Player> getListOfPlayers(String teamId);
 
-    boolean addPlayerInTeam(String teamId, String playerId, String creatorId);
+    boolean addPlayerInTeam(AddPlayerRequest addPlayerRequest);
 
     List<Team> getListOfTeam();
 

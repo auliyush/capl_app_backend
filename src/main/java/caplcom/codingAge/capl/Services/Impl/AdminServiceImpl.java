@@ -16,10 +16,10 @@ public class AdminServiceImpl implements AdminUserService {
     @Override
     public AdminUser createAdmin(UserRequest userRequest) {
         AdminUser adminUser = new AdminUser();
-        adminUser.setUserName(userRequest.getUserName());
-        adminUser.setUserPhone(userRequest.getUserPhone());
-        adminUser.setUserEmail(userRequest.getUserEmail());
-        adminUser.setUserPassword(userRequest.getUserPassword());
+        adminUser.setAdminName(userRequest.getUserName());
+        adminUser.setAdminPhone(userRequest.getUserPhone());
+        adminUser.setAdminEmail(userRequest.getUserEmail());
+        adminUser.setAdminPassword(userRequest.getUserPassword());
         return adminUserRepository.save(adminUser);
     }
 
@@ -31,5 +31,15 @@ public class AdminServiceImpl implements AdminUserService {
         }else {
             return null;
         }
+    }
+
+    @Override
+    public AdminUser getByPhoneNumber(String phoneNumber) {
+        return adminUserRepository.findByAdminPhone(phoneNumber);
+    }
+
+    @Override
+    public AdminUser getByEmail(String userEmail) {
+        return adminUserRepository.findByAdminEmail(userEmail);
     }
 }

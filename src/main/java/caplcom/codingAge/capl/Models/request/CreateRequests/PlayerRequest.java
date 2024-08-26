@@ -12,7 +12,4 @@ public class PlayerRequest {
     private String playerPhone;
     private String playerEmail;
     private String playerPassword;
-    private String playerDob;
-    private String playerAddress;
-    private String PlayerType;
 }

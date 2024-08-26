@@ -15,17 +15,11 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Autowired
     private PlayerRepository playerRepository;
+
     @Override
     public Player createPlayer(PlayerRequest playerRequest) {
-        if(playerRepository.findByPlayerName(playerRequest.getPlayerName()) == null){
-            if(playerRepository.findByPlayerPhone(playerRequest.getPlayerPhone()) == null){
-                if(playerRepository.findByPlayerEmail(playerRequest.getPlayerEmail()) == null){
-                    Player player = getPlayer(playerRequest);
-                    return playerRepository.save(player);
-                }
-            }
-        }
-        return null;
+        Player player = getPlayer(playerRequest);
+        return playerRepository.save(player);
     }
 
     private static Player getPlayer(PlayerRequest playerRequest) {
@@ -34,9 +28,6 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerPhone(playerRequest.getPlayerPhone());
         player.setPlayerEmail(playerRequest.getPlayerEmail());
         player.setPlayerPassword(playerRequest.getPlayerPassword());
-        player.setPlayerDob(playerRequest.getPlayerDob());
-        player.setPlayerAddress(playerRequest.getPlayerAddress());
-        player.setPlayerType(playerRequest.getPlayerType());
         return player;
     }
 
@@ -44,6 +35,17 @@ public class PlayerServiceImpl implements PlayerService {
     public Player getPlayerById(String playerId) {
         return playerRepository.findByPlayerId(playerId);
     }
+
+    @Override
+    public Player getByPhoneNumber(String phoneNumber) {
+        return playerRepository.findByPlayerPhone(phoneNumber);
+    }
+
+    @Override
+    public Player getByEmail(String userEmail) {
+        return playerRepository.findByPlayerEmail(userEmail);
+    }
+
     @Override
     public List<Player> getListOfPlayer() {
         return playerRepository.findAll();

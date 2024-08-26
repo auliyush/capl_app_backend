@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping("/signUp")
     public User signUp(@RequestBody UserRequest userRequest) {
-        return userService.signUp(userRequest);
+        return userService.createUser(userRequest);
     }
 
     @PostMapping("/signIn")
@@ -30,9 +30,9 @@ public class UserController {
     public User getUserByUserId(@RequestParam String userId){
         return userService.getUserByUserId(userId);
     }
+
     @GetMapping("/listOf/User")
     public List<User> getListOfUsers(){
         return userService.getListOfUsers();
-
     }
 }
