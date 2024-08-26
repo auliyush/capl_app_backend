@@ -34,6 +34,7 @@ public class TeamServiceImpl implements TeamService {
             team.setTeamName(teamRequest.getTeamName());
             team.setTeamNickName(teamRequest.getTeamNickName());
             team.setTeamProfilePhotoUrl(teamRequest.getTeamProfilePhotoUrl());
+
             return teamRepository.save(team);
         }
         return null;
