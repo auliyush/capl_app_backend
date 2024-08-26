@@ -1,23 +1,21 @@
 package caplcom.codingAge.capl.Models;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "ad")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Document(collection = "Extras")
-public class Extras {
+public class AdminUser {
     @Id
-    private String id;
-    private String scoreBoardId;
-    private String extraDescription;
-    private Integer extraRun;
-
+    private String adminId;
+    private String userName;
+    private String userPhone;
+    private String userEmail;
+    private String userPassword;
+    private String userProfilePhotoUrl;
 }

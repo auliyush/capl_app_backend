@@ -1,7 +1,6 @@
 package caplcom.codingAge.capl.Controllers;
 
 import caplcom.codingAge.capl.Models.ScoreBoard;
-import caplcom.codingAge.capl.Models.request.CreateRequests.ScoreBoardRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateScoreBoardRequest;
 import caplcom.codingAge.capl.Services.ScoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,11 @@ public class ScoreBoardController {
     public ScoreBoard getScoreBoardByMatchAndTeamId(@RequestParam String teamId, String matchId){
         return scoreBoardService.getScoreBoardByMatchAndTeamId(teamId, matchId);
     }
-
+    // update scoreBoard api for create initial stats of scoreboard when tap on button start match
+// after create match
     @PutMapping("/update/scoreboard")
-    public ScoreBoard editScoreBoard (@RequestBody UpdateScoreBoardRequest updateScoreBoardRequest){
-        return scoreBoardService.editScoreBoard (updateScoreBoardRequest);
+    public ScoreBoard updateScoreBoard(@RequestBody UpdateScoreBoardRequest updateScoreBoardRequest){
+        return scoreBoardService.updateScoreBoard(updateScoreBoardRequest);
     }
 
     @GetMapping("/list/scoreboard")

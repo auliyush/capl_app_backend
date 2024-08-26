@@ -29,5 +29,5 @@ public class PlayerController {
     public List<Player> getListOfPlayer(){
         return playerService.getListOfPlayer();
     }
-
 }
+// this is checked 25/08/2024

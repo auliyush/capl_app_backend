@@ -24,12 +24,14 @@ public class MatchController {
     public Match editMatchDetails(@RequestBody UpdateMatchRequest updateMatchRequest){
         return matchService.editMatchDetails(updateMatchRequest);
     }
-    @GetMapping("/matches/by/TeamId")
-    public List<Match> getMatchesByTeamId(@RequestParam String teamId){
-        return matchService.getMatchesByTeamId(teamId);
-    }
+//    @GetMapping("/matches/by/TeamId")
+//    public List<Match> getMatchesByTeamId(@RequestParam String teamId){
+//        return matchService.getMatchesByTeamId(teamId);
+//    }
     @PutMapping("/update/match")
     public Match updateMatch(@RequestParam String matchId){
         return matchService.updateMatch(matchId);
     }
 }
+// not proper please check
+// this is checked 25/08/2024

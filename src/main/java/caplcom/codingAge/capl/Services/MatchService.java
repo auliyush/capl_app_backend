@@ -10,7 +10,7 @@ public interface MatchService {
     Match createMatch(MatchRequest matchRequest);
     Match editMatchDetails(UpdateMatchRequest updateMatchRequest);
     Match getMatchById(String id);
-    List<Match> getMatchesByTeamId(String teamId);
+//    List<Match> getMatchesByTeamId(String teamId);
     Match saveUpdates(Match match);
 
     Match updateMatch(String matchId);

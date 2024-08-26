@@ -10,9 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExtrasRequest {
-    private String matchId;
-    private String teamId;
-    private String wideRun;
-    private String legByRun;
-    private String noBallRun;
+    private String scoreBoardId;
+    private String extraDescription;
+    private Integer extraRuns;
 }

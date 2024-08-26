@@ -8,13 +8,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UpdateScoreBoardRequest {
-
-    private String scoreboardId;
+    private String matchId;
+    private String teamId;
     private boolean inning;
     private String strikerId;
     private String nonStrikerId;
     private String bowlerId;
-    private int totalRuns;
-    private double overs;
-    private int noOfWickets;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class ScoreBoard {
 
     @Id
-    private String id;
+    private String scoreBoardId;
     private String matchId;
     private String teamId;
     private boolean inning;
@@ -27,7 +27,8 @@ public class ScoreBoard {
     private int totalWickets;
     private double overs;
     private int noOfWickets;
-    private List <Stats> statsList=new ArrayList<>();
+    private List <BatterStat> batterStatList = new ArrayList<>();
+    private List <BowlerStat> bowlerStatList = new ArrayList<>();
     private List <Extras> extrasList=new ArrayList<>();
 
 

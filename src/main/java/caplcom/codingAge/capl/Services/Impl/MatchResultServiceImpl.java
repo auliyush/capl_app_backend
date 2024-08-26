@@ -1,12 +1,12 @@
 package caplcom.codingAge.capl.Services.Impl;
 
 
-import caplcom.codingAge.capl.Models.Match;
-import caplcom.codingAge.capl.Models.MatchResult;
-import caplcom.codingAge.capl.Models.Stats;
+import caplcom.codingAge.capl.Models.*;
 import caplcom.codingAge.capl.Models.request.CreateRequests.MatchResultRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchResult;
 import caplcom.codingAge.capl.Repositories.MatchResultRepository;
+import caplcom.codingAge.capl.Services.BatterStatService;
+import caplcom.codingAge.capl.Services.BowlerStatService;
 import caplcom.codingAge.capl.Services.MatchResultService;
 import caplcom.codingAge.capl.Services.ScoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +19,24 @@ import java.util.Objects;
 @Service
 public class MatchResultServiceImpl implements MatchResultService {
     @Autowired
-    MatchResultRepository matchResultRepository;
+    private MatchResultRepository matchResultRepository;
     @Autowired
     private ScoreBoardService scoreBoardService;
+    @Autowired
+    private BatterStatService batterStatService;
+    @Autowired
+    private BowlerStatService bowlerStatService;
 
     @Override
     public MatchResult getMatchResultByMatchId(String matchId) {
-        MatchResult matchResult = matchResultRepository.findByMatchId(matchId);
-        return matchResult;
+        return matchResultRepository.findByMatchId(matchId);
     }
 
     @Override
-    public List<MatchResult> getMatchByTeamId(String teamId) {
+    public List<MatchResult> getMatchResultByTeamId(String teamId) {
         List<MatchResult> matchResults = matchResultRepository.findByFirstTeamId(teamId);
-        if (matchResults == null) {
-            matchResults = matchResultRepository.findBySecondTeamId(teamId);
-        }
-        if (matchResults != null) {
-            return matchResults;
-        }
-        return new ArrayList<>();
+        matchResults.addAll(matchResultRepository.findBySecondTeamId(teamId));
+       return matchResults;
     }
 
     @Override
@@ -47,15 +45,17 @@ public class MatchResultServiceImpl implements MatchResultService {
         matchResult.setMatchId(match.getMatchId());
         matchResult.setTournamentId(match.getTournamentId());
         matchResult.setFirstTeamId(match.getFirstTeamId());
-        matchResult.setFirstTeamTotalRuns(scoreBoardService.getScoreBoardByMatchAndTeamId(
-                match.getFirstTeamId(), match.getMatchId()).getTotalRuns());
-        matchResult.setFirstTeamTotalWickets(scoreBoardService.getScoreBoardByMatchAndTeamId(
-                match.getFirstTeamId(), match.getMatchId()).getTotalWickets());
+
+        ScoreBoard firstTeamScoreBoard = scoreBoardService.getScoreBoardByMatchAndTeamId(
+                match.getFirstTeamId(), match.getMatchId());
+        ScoreBoard secondTeamScoreBoard = scoreBoardService.getScoreBoardByMatchAndTeamId(
+                match.getSecondTeamId(), match.getMatchId());
+
+        matchResult.setFirstTeamTotalRuns(firstTeamScoreBoard.getTotalRuns());
+        matchResult.setFirstTeamTotalWickets(firstTeamScoreBoard.getTotalWickets());
         matchResult.setSecondTeamId(match.getSecondTeamId());
-        matchResult.setSecondTeamTotalRuns(scoreBoardService.getScoreBoardByMatchAndTeamId(
-                match.getSecondTeamId(), match.getMatchId()).getTotalRuns());
-        matchResult.setSecondTeamTotalWickets(scoreBoardService.getScoreBoardByMatchAndTeamId(
-                match.getSecondTeamId(), match.getMatchId()).getTotalWickets());
+        matchResult.setSecondTeamTotalRuns(secondTeamScoreBoard.getTotalRuns());
+        matchResult.setSecondTeamTotalWickets(secondTeamScoreBoard.getTotalWickets());
 
         int highestRunPlayer1 = -99;
         int highestWicketPlayer1 = -99;
@@ -63,16 +63,21 @@ public class MatchResultServiceImpl implements MatchResultService {
         int highestWicketPlayer2 = -99;
         String highestRunPlayer = "";
         String highestWicketPlayer = "";
-        for(Stats stats : match.getPlayers()){
-            if (stats.getTotalRuns() > highestRunPlayer1){
-                highestRunPlayer1 = stats.getTotalRuns();
-                highestWicketPlayer1 = stats.getWickets().size();
-                highestRunPlayer = stats.getPlayerId();
+        List<BatterStat> batterStatList = firstTeamScoreBoard.getBatterStatList();
+        batterStatList.addAll(secondTeamScoreBoard.getBatterStatList());
+        for(BatterStat batterStat : batterStatList){
+            if (batterStat.getTotalRuns() > highestRunPlayer1){
+                highestRunPlayer1 = batterStat.getTotalRuns();
+                highestRunPlayer = batterStat.getPlayerId();
             }
-            if(stats.getWickets().size() > highestWicketPlayer2){
-                highestWicketPlayer2 = stats.getWickets().size();
-                highestRunPlayer2 = stats.getTotalRuns();
-                highestWicketPlayer = stats.getPlayerId();
+        }
+        List<BowlerStat> bowlerStatList = firstTeamScoreBoard.getBowlerStatList();
+        bowlerStatList.addAll(secondTeamScoreBoard.getBowlerStatList());
+        for (BowlerStat bowlerStat : bowlerStatList){
+            if(bowlerStat.getWicketsList().size() > highestWicketPlayer2){
+                highestWicketPlayer2 = bowlerStat.getWicketsList().size();
+                // incomplete logic not found
+                highestWicketPlayer = bowlerStat.getPlayerId();
             }
         }
         highestRunPlayer1 = highestRunPlayer1 + (highestWicketPlayer1 * 20);
@@ -86,14 +91,9 @@ public class MatchResultServiceImpl implements MatchResultService {
         }else {
             matchResult.setManOfTheMatchId(highestRunPlayer);
         }
-        // set winning team is also pending
+        // set winning team is also pending and man of the match also
         matchResultRepository.save(matchResult);
         return matchResult;
     }
 
-    @Override
-    public MatchResult updateMatchResult(UpdateMatchResult updateMatchResult) {
-        MatchResult matchResult = getMatchResultByMatchId(updateMatchResult.getMatchId());
-return matchResult;
-    }
 }

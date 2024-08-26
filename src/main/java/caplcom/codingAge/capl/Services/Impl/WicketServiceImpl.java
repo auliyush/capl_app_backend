@@ -26,7 +26,7 @@ public class WicketServiceImpl implements WicketService {
             Wicket wicket = new Wicket();
             wicket.setBatterId(wicketRequest.getBatterId());
             wicket.setBowlerId(wicketRequest.getBowlerId());
-            wicket.setTeamId(wicketRequest.getTeamId());
+            wicket.setScoreBoardId(wicketRequest.getTeamId());
             wicket.setFielderId(wicketRequest.getFielderId());
             wicket.setWicketDescription(wicketRequest.getWicketDescription());
             return wicketRepository.save(wicket);

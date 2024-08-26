@@ -43,12 +43,12 @@ public class TeamController {
     }
 
     @PutMapping("/add/player")
-    public boolean addPlayerInTeam(@RequestParam String teamId, String playerId){
-        return teamService.addPlayerInTeam(teamId, playerId);
+    public boolean addPlayerInTeam(@RequestParam String teamId, String playerId, String creatorId){
+        return teamService.addPlayerInTeam(teamId, playerId, creatorId);
     }
     @PutMapping("/remove/player")
-    public boolean removePlayerFromTeam(@RequestParam String teamId, String playerId){
-     return teamService.removePlayerFromTeam(teamId, playerId);
+    public boolean removePlayerFromTeam(@RequestParam String teamId, String playerId, String creatorId){
+     return teamService.removePlayerFromTeam(teamId, playerId, creatorId);
     }
     @GetMapping("/listOf/Teams")
     public List<Team> getListOfTeam(){

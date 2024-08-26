@@ -1,6 +1,5 @@
 package caplcom.codingAge.capl.Models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +9,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Document(collection ="batterStats")
 @AllArgsConstructor
-@Document(collection = "Extras")
-public class Extras {
+@NoArgsConstructor
+public class BatterStat {
     @Id
-    private String id;
+    private String statId;
     private String scoreBoardId;
-    private String extraDescription;
-    private Integer extraRun;
-
+    private String teamId;
+    private String playerId;
+    private int totalRuns;
+    private double totalBalls;
+    private int totalFours;
+    private int totalSix;
+    private double strikeRate;
 }

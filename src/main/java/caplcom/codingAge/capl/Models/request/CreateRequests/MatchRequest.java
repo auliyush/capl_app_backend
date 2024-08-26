@@ -12,6 +12,8 @@ public class MatchRequest {
     private String creatorId;
     private String firstTeamId;
     private String secondTeamId;
+    private String tossWonTeamId;
+    private String selectionOfTossWinningTeam;
     private Integer matchDate;
     private Integer matchTime;
     private double overs;

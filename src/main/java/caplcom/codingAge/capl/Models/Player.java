@@ -11,10 +11,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Player extends User{
+public class Player{
+    @Id
+    private String playerId;
+    private String playerName;
+    private String playerPhone;
+    private String playerEmail;
+    private String playerPassword;
     private String playerDob;
     private String playerAddress;
     private String playerType;
+    private String playerJerseyNumber;
+    private Integer jerseyNumber;
     private String economyRate;
     private String strikeRate;
     private String highestScore;

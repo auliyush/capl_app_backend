@@ -2,10 +2,12 @@ package caplcom.codingAge.capl.Services.Impl;
 
 
 import caplcom.codingAge.capl.Models.Extras;
+import caplcom.codingAge.capl.Models.ScoreBoard;
 import caplcom.codingAge.capl.Models.request.CreateRequests.ExtrasRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateExtras;
 import caplcom.codingAge.capl.Repositories.ExtrasRepository;
 import caplcom.codingAge.capl.Services.ExtrasService;
+import caplcom.codingAge.capl.Services.ScoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +18,16 @@ import java.util.List;
 public class ExtrasServiceImpl implements ExtrasService {
 
     @Autowired
-    ExtrasRepository extrasRepository;
+    private ExtrasRepository extrasRepository;
     @Autowired
-    ScoreBoardServiceImpl scoreBoardService;
+    private ScoreBoardService scoreBoardService;
 
     @Override
     public Extras createExtras(ExtrasRequest extrasRequest) {
         Extras extras = new Extras();
-        extras.setTeamId(extrasRequest.getTeamId());
-        extras.setWideRun(extrasRequest.getWideRun());
-        extras.setLegByRun(extrasRequest.getLegByRun());
+        extras.setExtraDescription(extrasRequest.getExtraDescription());
+        extras.setExtraRun(extrasRequest.getExtraRuns());
+        scoreBoardService.addExtrasRun(extras);
         return extrasRepository.save(extras);
     }
 

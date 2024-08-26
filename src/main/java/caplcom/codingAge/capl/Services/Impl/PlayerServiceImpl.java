@@ -31,9 +31,9 @@ public class PlayerServiceImpl implements PlayerService {
     private static Player getPlayer(PlayerRequest playerRequest) {
         Player player = new Player();
         player.setPlayerName(playerRequest.getPlayerName());
-        player.setUserPhone(playerRequest.getPlayerPhone());
-        player.setUserEmail(playerRequest.getPlayerEmail());
-        player.setUserPassword(playerRequest.getPlayerPassword());
+        player.setPlayerPhone(playerRequest.getPlayerPhone());
+        player.setPlayerEmail(playerRequest.getPlayerEmail());
+        player.setPlayerPassword(playerRequest.getPlayerPassword());
         player.setPlayerDob(playerRequest.getPlayerDob());
         player.setPlayerAddress(playerRequest.getPlayerAddress());
         player.setPlayerType(playerRequest.getPlayerType());

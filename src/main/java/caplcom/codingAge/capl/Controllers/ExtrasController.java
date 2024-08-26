@@ -16,10 +16,9 @@ public class ExtrasController {
     ExtrasService extrasService;
 
     @PostMapping("/create")
-    Extras createExtras(ExtrasRequest extrasRequest) {
+    Extras createExtras(@RequestBody ExtrasRequest extrasRequest) {
         return extrasService.createExtras(extrasRequest);
     }
-
     @GetMapping("/{id}")
     Extras getExtrasById(String id) {
         return extrasService.getExtrasById(id);
@@ -35,3 +34,5 @@ public class ExtrasController {
         return extrasService.updateExtrasById(updateExtras);
     }
 }
+
+// i haven't checked it yet

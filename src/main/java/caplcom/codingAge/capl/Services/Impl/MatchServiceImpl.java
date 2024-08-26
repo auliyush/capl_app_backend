@@ -17,7 +17,7 @@ import java.util.Objects;
 public class MatchServiceImpl implements MatchService {
 
     @Autowired
-    private UserService userService;
+    private AdminUserService adminUserService;
     @Autowired
     private PlayerService playerService;
     @Autowired
@@ -31,7 +31,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Match createMatch(MatchRequest matchRequest) {
-        if (userService.getUserByUserId(matchRequest.getCreatorId()) != null) {
+        if (adminUserService.getAdminUserByUserId(matchRequest.getCreatorId()) != null) {
             Team firstTeam = teamService.getTeamById(matchRequest.getFirstTeamId());
             Team secondTeam = teamService.getTeamById(matchRequest.getSecondTeamId());
             if(firstTeam != null && secondTeam != null) {
@@ -42,20 +42,6 @@ public class MatchServiceImpl implements MatchService {
                 teamService.saveUpdates(secondTeam);
                 scoreBoardService.createScoreBoard(match.getMatchId(), match.getFirstTeamId());
                 scoreBoardService.createScoreBoard(match.getMatchId(), match.getSecondTeamId());
-                return matchRepository.save(match);
-            }
-        }
-        else if(playerService.getPlayerById(matchRequest.getCreatorId()) != null){
-            Team firstTeam = teamService.getTeamById(matchRequest.getFirstTeamId());
-            Team secondTeam = teamService.getTeamById(matchRequest.getFirstTeamId());
-            if(firstTeam != null && secondTeam != null){
-                Match match = getMatch(matchRequest);
-                firstTeam.getMatchList().add(match);
-                teamService.saveUpdates(firstTeam);
-                secondTeam.getMatchList().add(match);
-                teamService.saveUpdates(secondTeam);
-               scoreBoardService.createScoreBoard(match.getMatchId(), match.getFirstTeamId());
-               scoreBoardService.createScoreBoard(match.getMatchId(), match.getSecondTeamId());
                 return matchRepository.save(match);
             }
         }
@@ -93,14 +79,14 @@ public class MatchServiceImpl implements MatchService {
         return null;
     }
     @Override
-    public Match getMatchById(String id) {
-        return matchRepository.findByMatchId(id);
+    public Match getMatchById(String matchId) {
+        return matchRepository.findByMatchId(matchId);
     }
 
-    @Override
-    public List<Match> getMatchesByTeamId(String teamId) {
-        return teamService.getTeamById(teamId).getMatchList();
-    }
+//    @Override
+//    public List<Match> getMatchesByTeamId(String teamId) {
+//        return teamService.getTeamById(teamId).getMatchList();
+//    }
 
     @Override
     public Match updateMatch(String matchId) {

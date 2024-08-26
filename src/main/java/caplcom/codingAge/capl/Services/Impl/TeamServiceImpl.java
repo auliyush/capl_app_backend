@@ -6,6 +6,7 @@ import caplcom.codingAge.capl.Models.Team;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Repositories.TeamRepository;
+import caplcom.codingAge.capl.Services.AdminUserService;
 import caplcom.codingAge.capl.Services.PlayerService;
 import caplcom.codingAge.capl.Services.TeamService;
 import caplcom.codingAge.capl.Services.UserService;
@@ -24,9 +25,9 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private PlayerService playerService;
     @Autowired
-    private UserService userService;
+    private AdminUserService adminUserService;
     public Team createTeam(TeamRequest teamRequest) {
-        if(userService.getUserByUserId(teamRequest.getTeamCreatorId()) != null){
+        if(adminUserService.getAdminUserByUserId(teamRequest.getTeamCreatorId()) != null){
             Team team = new Team();
             team.setTeamCreatorId(teamRequest.getTeamCreatorId());
             team.setTeamName(teamRequest.getTeamName());
@@ -69,9 +70,9 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean addPlayerInTeam(String teamId, String playerId) {
+    public boolean addPlayerInTeam(String teamId, String playerId, String creatorId) {
         Team team = getTeamById(teamId);
-        if(team != null){
+        if(team != null && team.getTeamCreatorId().equals(creatorId)){
             Player player = playerService.getPlayerById(playerId);
             if(player != null){
                 if (team.getPlayerList() == null) {
@@ -86,15 +87,16 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean removePlayerFromTeam(String teamId, String playerId) {
+    public boolean removePlayerFromTeam(String teamId, String playerId, String creatorId) {
         Team team = getTeamById(teamId);
-        if(team != null){
+        if(team != null && team.getTeamCreatorId().equals(creatorId)){
             for(Player player : getListOfPlayers(teamId)){
                 if(player.getPlayerId().equals(playerId)){
                    getListOfPlayers(teamId).remove(player);
                    saveUpdates(team);
                     return true;
                 }
+                // why player not remove this api will not work properly
             }
         }
         return false;

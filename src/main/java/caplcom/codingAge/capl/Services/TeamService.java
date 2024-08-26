@@ -19,10 +19,10 @@ public interface TeamService {
 
     List<Player> getListOfPlayers(String teamId);
 
-    boolean addPlayerInTeam(String teamId, String playerId);
+    boolean addPlayerInTeam(String teamId, String playerId, String creatorId);
 
     List<Team> getListOfTeam();
 
-    boolean removePlayerFromTeam(String teamId, String playerId);
+    boolean removePlayerFromTeam(String teamId, String playerId, String creatorId);
     Team saveUpdates(Team team);
 }
