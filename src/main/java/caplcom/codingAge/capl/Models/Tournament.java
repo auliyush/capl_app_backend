@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection ="Tournament")
+@Document(collection = "Tournament")
 public class Tournament {
     @Id
     private String tournamentId;
@@ -30,7 +30,6 @@ public class Tournament {
     private Date tournamentEndDate;
     private String stadiumName;
     private String stadiumAddress;
-
-// it has to be List<TeamStats>
+    private List<TeamStats> teamStatsList;
     private List<Team> teamList = new ArrayList<>();
 }

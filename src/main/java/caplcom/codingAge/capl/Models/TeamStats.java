@@ -19,7 +19,8 @@ public class TeamStats {
     @Id
     private String id;
     private String teamId;
-    private List<Match> matchWinning = new ArrayList<>();
-    private List<Match> matchLosing = new ArrayList<>();
-    private List<Match> matchDrawn = new ArrayList<>();
+    private String tournamentId;
+    private int matchWinning ;
+    private int matchLosing ;
+    private int matchDrawn ;
 }

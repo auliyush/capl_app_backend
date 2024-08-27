@@ -9,4 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TeamStatsRequest {
     private String teamId;
+    private String tournamentId;
 }

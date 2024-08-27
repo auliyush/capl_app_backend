@@ -17,7 +17,7 @@ public class MatchResultController {
     @Autowired
     private MatchResultService matchResultService;
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public MatchResult createMatchResult(@RequestParam String matchId,
                                          String firstTeamScoreBoardId, String secondTeamScoreBoardId){
         return matchResultService.createMatchResult(matchId, firstTeamScoreBoardId, secondTeamScoreBoardId);

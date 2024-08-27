@@ -16,10 +16,10 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping("/create/player")
-    public Player createPlayer(@RequestBody PlayerRequest playerRequest){
-        return playerService.createPlayer(playerRequest);
-    }
+//    @PostMapping("/create/player")
+//    public Player createPlayer(@RequestBody PlayerRequest playerRequest){
+//        return playerService.createPlayer(playerRequest);
+//    }
     @GetMapping("/get/player")
     public Player getPlayerById(@RequestParam String playerId){
         return playerService.getPlayerById(playerId);

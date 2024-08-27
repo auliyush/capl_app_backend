@@ -12,61 +12,30 @@ public class TeamStatsController {
     @Autowired
     private TeamStatsService teamStatsService;
 
-    @GetMapping("/seebyid")
-    // what we are getting here...
-    public TeamStats getTeamStatsById(@RequestParam String id){
-      return teamStatsService.getTeamStatsById(id);
-    }
-    @GetMapping("/seebyTeamid")
-    /// same here
-    public TeamStats getTeamStatsByTeamId(@RequestParam String teamId){
-        return teamStatsService.getTeamStatsByTeamId(teamId);
-    }
-/*
-    @GetMapping("/seeWonMatchesById")
-    public TeamStats getWinMatchesById(@RequestParam String id){
-        return teamStatsService.getWinMatchesById(id).get();
+    @GetMapping("/getByStatsId")
+    public TeamStats getTeamStatsById(@RequestParam String id) {
+        return teamStatsService.getTeamStatsById(id);
     }
 
-
-    @GetMapping("/seeWonMatchesByTeamId")
-    public TeamStats getWinMatchesByTeamId(@RequestParam String teamId){
-        return teamStatsService.getWinMatchesByTeamId(teamId).get();
+    @GetMapping("/getTeamStatsByTeamIdAndTournamentId")
+    public TeamStats getTeamStatsByTeamIdAndTournamentId(@RequestParam String teamId, String tournamentId) {
+        return teamStatsService.getTeamStatsByTeamId(teamId, tournamentId);
     }
 
-    @GetMapping("/seeLooseMatchesByTeamId")
-    public TeamStats getLooseMatchByTeamId(@RequestParam String teamId){
-        return teamStatsService.getLooseMatchByTeamId(teamId).get();
+    @PutMapping("/addWinMatchByTeamIdAndTournamentId")
+    public TeamStats addWinMatchByTeamIdAndTournamentId(@RequestParam String teamId, String tournamentId) {
+        return teamStatsService.addWinMatchByTeamIdAndTournamentId(teamId, tournamentId);
     }
 
-   @GetMapping("/seeDrawnMatchesByTeamId")
-   public TeamStats getDrawnMatchesByTeamId(@RequestParam String teamId){
-      return teamStatsService.getDrawnMatchesByTeamId(teamId).get();
+    @PutMapping("/addLooseMatchByTeamIdAndTournamentId")
+    public TeamStats addLooseMatchByTeamIdAndTournamentId(@RequestParam String teamId, String tournamentId) {
+        return teamStatsService.addLooseMatchByTeamIdAndTournamentId(teamId, tournamentId);
     }
 
- */
-
-    @PostMapping("/createMatchTeamStats")
-    // need to use proper naming convention
-    public TeamStats createMatchTeamStats(@RequestBody TeamStatsRequest teamStatsRequest) {
-        return teamStatsService.createMatchTeamStats(teamStatsRequest);
+    @PutMapping("/addDrawMatchByTeamIdAndTournamentId")
+    public TeamStats addDrawMatchByTeamIdAndTournamentId(@RequestParam String teamId, String tournamentId) {
+        return teamStatsService.addDrawMatchByTeamIdAndTournamentId(teamId, tournamentId);
     }
 
-    @PutMapping("/editmatchTeamStats")
-    public TeamStats editMatchTeamStats(@RequestParam String teamId){
-        return teamStatsService.editMatchTeamStats(teamId);
-    }
-/*
-    @PutMapping("/addWonMatches")
-    public TeamStats addWinsmatches(@RequestParam String teamId){
-        return teamStatsService.addWinsmatches(teamId);
-    }
-
-    @PutMapping("/addDrawMatches")
-    public TeamStats addDrawnMatches(@RequestParam String teamId){
-        return teamStatsService.addDrawnMatches(teamId);
-    }
-
- */
 
 }
