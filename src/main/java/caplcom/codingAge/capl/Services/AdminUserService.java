@@ -8,7 +8,7 @@ public interface AdminUserService {
 
     AdminUser getAdminUserByUserId(String adminId);
 
-    AdminUser getByPhoneNumber(String phoneNumber);
+    AdminUser getAdminByPhoneNumber(String phoneNumber);
 
-    AdminUser getByEmail(String userEmail);
+    AdminUser getAdminByEmail(String userEmail);
 }

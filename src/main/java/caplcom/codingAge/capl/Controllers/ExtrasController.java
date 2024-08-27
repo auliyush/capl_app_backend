@@ -13,19 +13,19 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ExtrasController {
     @Autowired
-    ExtrasService extrasService;
+    private ExtrasService extrasService;
 
     @PostMapping("/create")
-    Extras createExtras(@RequestBody ExtrasRequest extrasRequest) {
+    public Extras createExtras(@RequestBody ExtrasRequest extrasRequest) {
         return extrasService.createExtras(extrasRequest);
     }
-    @GetMapping("/{id}")
-    Extras getExtrasById(String id) {
-        return extrasService.getExtrasById(id);
-    }
+//    @GetMapping("/{id}")
+//    Extras getExtrasById(String id) {
+//        return extrasService.getExtrasById(id);
+//    }
 
     @GetMapping("/byTeamId")
-    List<Extras> getExtrasByTeamId(String teamId) {
+    public List<Extras> getExtrasByTeamId(String teamId) {
         return extrasService.getExtrasByTeamId(teamId);
     }
 

@@ -19,15 +19,9 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     private AdminUserService adminUserService;
     @Autowired
-    private PlayerService playerService;
-    @Autowired
     private MatchRepository matchRepository;
     @Autowired
     private TeamService teamService;
-    @Autowired
-    private MatchResultService matchResultService;
-    @Autowired
-    private ScoreBoardService scoreBoardService;
 
     @Override
     public Match createMatch(MatchRequest matchRequest) {
@@ -40,8 +34,6 @@ public class MatchServiceImpl implements MatchService {
                 teamService.saveUpdates(firstTeam);
                 secondTeam.getMatchList().add(match);
                 teamService.saveUpdates(secondTeam);
-                scoreBoardService.createScoreBoard(match.getMatchId(), match.getFirstTeamId());
-                scoreBoardService.createScoreBoard(match.getMatchId(), match.getSecondTeamId());
                 return matchRepository.save(match);
             }
         }
@@ -94,7 +86,6 @@ public class MatchServiceImpl implements MatchService {
         if(match.isMatchStatus()){
            return null;
         }
-        matchResultService.createMatchResult(match);
         return matchRepository.save(match);
     }
 

@@ -4,6 +4,7 @@ package caplcom.codingAge.capl.Controllers;
 import caplcom.codingAge.capl.Models.MatchResult;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchResult;
 import caplcom.codingAge.capl.Services.MatchResultService;
+import caplcom.codingAge.capl.Services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,15 +15,20 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class MatchResultController {
     @Autowired
-    MatchResultService matchResultService;
+    private MatchResultService matchResultService;
 
+    @PostMapping("create")
+    public MatchResult createMatchResult(@RequestParam String matchId,
+                                         String firstTeamScoreBoardId, String secondTeamScoreBoardId){
+        return matchResultService.createMatchResult(matchId, firstTeamScoreBoardId, secondTeamScoreBoardId);
+    }
     @GetMapping("/byMatchId")
-    MatchResult getMatchResultByMatchId(String matchId) {
+    public MatchResult getMatchResultByMatchId(String matchId) {
         return matchResultService.getMatchResultByMatchId(matchId);
     }
 
     @GetMapping("/lists")
-    List<MatchResult> getMatchResultByTeamId(String teamId) {
+    public List<MatchResult> getMatchResultByTeamId(String teamId) {
         return matchResultService.getMatchResultByTeamId(teamId);
     }
 }

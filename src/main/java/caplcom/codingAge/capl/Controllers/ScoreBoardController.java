@@ -1,6 +1,7 @@
 package caplcom.codingAge.capl.Controllers;
 
 import caplcom.codingAge.capl.Models.ScoreBoard;
+import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBatter;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBowler;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateScoreBoardRequest;
 import caplcom.codingAge.capl.Services.ScoreBoardService;
@@ -28,7 +29,10 @@ public class ScoreBoardController {
     public ScoreBoard getScoreBoardById (@RequestParam String scoreBoardId){
         return scoreBoardService.getScoreBoardById (scoreBoardId);
     }
-
+    @PostMapping("/create")
+    public ScoreBoard createScoreBoard(String matchId, String teamId){
+        return scoreBoardService.createScoreBoard(matchId,teamId);
+    }
     @GetMapping("/get/scoreboardTeamById")
     public ScoreBoard getScoreBoardByMatchAndTeamId(@RequestParam String teamId, String matchId){
         return scoreBoardService.getScoreBoardByMatchAndTeamId(teamId, matchId);
@@ -45,6 +49,10 @@ public class ScoreBoardController {
     }
     //**
     // todo implement an api for change new batter
+    @PutMapping("/change/batter")
+    public ScoreBoard changeBatter(@RequestBody UpdateBatter updateBatter){
+        return scoreBoardService.updateBatter(updateBatter);
+    }
     //**
     @GetMapping("/list/scoreboard")
     List <ScoreBoard> getListOfScoreBoard () {

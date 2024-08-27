@@ -14,11 +14,10 @@ public class AdminUserController {
     @Autowired
     private AdminUserService adminUserService;
 
-    @PostMapping("/create")
-    public AdminUser createAdmin(@RequestBody UserRequest userRequest){
-        return adminUserService.createAdmin(userRequest);
-    }
-
+//    @PostMapping("/create")
+//    public AdminUser createAdmin(@RequestBody UserRequest userRequest){
+//        return adminUserService.createAdmin(userRequest);
+//    }
     @GetMapping("/byId")
     public  AdminUser getAdminById(@RequestParam String adminId){
         return adminUserService.getAdminUserByUserId(adminId);

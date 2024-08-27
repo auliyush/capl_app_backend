@@ -1,6 +1,7 @@
 package caplcom.codingAge.capl.Services.Impl;
 
 import caplcom.codingAge.capl.Models.*;
+import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBatter;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBowler;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateScoreBoardRequest;
 import caplcom.codingAge.capl.Repositories.ScoreBoardRepository;
@@ -54,9 +55,6 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         ScoreBoard scoreBoard = getScoreBoardByMatchAndTeamId(updateScoreBoardRequest.getTeamId(),
                 updateScoreBoardRequest.getMatchId());
         if (scoreBoard != null) {
-//                scoreBoard.setStrikerId(updateScoreBoardRequest.getStrikerId());
-//                scoreBoard.setNonStrikerId(updateScoreBoardRequest.getNonStrikerId());
-//                scoreBoard.setBowlerId(updateScoreBoardRequest.getBowlerId());
             if (batterStatService.getBatterStatByPlayerId(updateScoreBoardRequest.getStrikerId(),
                     scoreBoard.getScoreBoardId()) == null) {
                 BatterStat striker = batterStatService.createInningBatterStats(scoreBoard.getScoreBoardId(),
@@ -69,10 +67,8 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
                 BatterStat nonStriker = batterStatService.createInningBatterStats(scoreBoard.getScoreBoardId(),
                         scoreBoard.getTeamId(), scoreBoard.getNonStrikerId());
                 scoreBoard.getBatterStatList().add(nonStriker);
-                scoreBoard.setStrikerId(nonStriker.getStatId());
+                scoreBoard.setNonStrikerId(nonStriker.getStatId());
             }
-            // todo complete this first
-            // create initial Striker & non Striker stats opening time
             Match match = matchService.getMatchById(updateScoreBoardRequest.getMatchId());
             String teamId = (match.getFirstTeamId().equals(updateScoreBoardRequest.getTeamId()))
                     ? match.getSecondTeamId() : match.getFirstTeamId();
@@ -130,7 +126,8 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
                 ? match.getSecondTeamId() : match.getFirstTeamId();
         Player player = teamService.getPlayerByJerseyNumber(updateBowler.getNewBowlerJerseyNumber(), teamId);
         if (player != null) {
-            BowlerStat bowlerStat = bowlerStatService.getBowlerStatById(player.getPlayerId());
+            BowlerStat bowlerStat = bowlerStatService.getBowlerStatByPlayerId(
+                    scoreBoard.getScoreBoardId(), player.getPlayerId());
             if (bowlerStat == null) {
                 BowlerStat bowlerStat1 = bowlerStatService.createInningBowlerStats(
                         scoreBoard.getScoreBoardId(), teamId, player.getPlayerId());
@@ -144,6 +141,40 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
             return null;
         }
         scoreBoardRepository.save(scoreBoard);
+        return null;
+    }
+
+    @Override
+    public ScoreBoard updateBatter(UpdateBatter updateBatter) {
+        ScoreBoard scoreBoard = getScoreBoardById(updateBatter.getScoreBoardId());
+        if(!scoreBoard.isInning()){
+            return null;
+        }
+        Match match = matchService.getMatchById(scoreBoard.getMatchId());
+        Player player = teamService.getPlayerByJerseyNumber(
+                updateBatter.getNewBatterJerseyNumber(), scoreBoard.getTeamId());
+        if(player != null){
+            BatterStat batterStat = batterStatService.getBatterStatByPlayerId(
+                    updateBatter.getNewBatterId(), scoreBoard.getScoreBoardId());
+            if(batterStat == null){
+                BatterStat batterStat1 = batterStatService.createInningBatterStats(
+                        scoreBoard.getScoreBoardId(), scoreBoard.getTeamId(),
+                        updateBatter.getNewBatterId());
+                if(scoreBoard.getStrikerId().equals(updateBatter.getPreviousBatterId())){
+                    scoreBoard.setStrikerId(updateBatter.getNewBatterId());
+                }else {
+                    scoreBoard.setNonStrikerId(updateBatter.getNewBatterId());
+                }
+                scoreBoardRepository.save(scoreBoard);
+            }else {
+                    if(scoreBoard.getStrikerId().equals(updateBatter.getPreviousBatterId())){
+                        scoreBoard.setStrikerId(updateBatter.getNewBatterId());
+                    }else {
+                        scoreBoard.setNonStrikerId(updateBatter.getNewBatterId());
+                    }
+                    scoreBoardRepository.save(scoreBoard);
+            }
+        }
         return null;
     }
 

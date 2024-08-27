@@ -3,6 +3,7 @@ package caplcom.codingAge.capl.Services;
 import caplcom.codingAge.capl.Models.Extras;
 import caplcom.codingAge.capl.Models.ScoreBoard;
 import caplcom.codingAge.capl.Models.Wicket;
+import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBatter;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBowler;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateScoreBoardRequest;
 
@@ -25,4 +26,6 @@ public interface ScoreBoardService {
     ScoreBoard updateBowler(UpdateBowler updateBowler);
 
     ScoreBoard addWicket(Wicket wicket);
+
+    ScoreBoard updateBatter(UpdateBatter updateBatter);
 }

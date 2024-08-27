@@ -34,12 +34,12 @@ public class AdminServiceImpl implements AdminUserService {
     }
 
     @Override
-    public AdminUser getByPhoneNumber(String phoneNumber) {
+    public AdminUser getAdminByPhoneNumber(String phoneNumber) {
         return adminUserRepository.findByAdminPhone(phoneNumber);
     }
 
     @Override
-    public AdminUser getByEmail(String userEmail) {
+    public AdminUser getAdminByEmail(String userEmail) {
         return adminUserRepository.findByAdminEmail(userEmail);
     }
 }

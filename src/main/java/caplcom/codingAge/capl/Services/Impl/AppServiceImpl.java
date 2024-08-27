@@ -40,7 +40,7 @@ public class AppServiceImpl implements AppService {
                 return null;
             }
         }
-        AdminUser adminUser = adminUserService.getByPhoneNumber(phoneNumber);
+        AdminUser adminUser = adminUserService.getAdminByPhoneNumber(phoneNumber);
         if(adminUser != null){
             if(adminUser.getAdminPassword().equals(password)){
                 return new LoginResponse(adminUser.getAdminId(), "ADMIN");
@@ -57,8 +57,8 @@ public class AppServiceImpl implements AppService {
                 userService.getByEmail(signUpRequest.getUserEmail()) == null &&
                 playerService.getByPhoneNumber(signUpRequest.getUserPhone()) == null &&
                 playerService.getByEmail(signUpRequest.getUserEmail()) == null &&
-                adminUserService.getByPhoneNumber(signUpRequest.getUserPhone()) == null &&
-                adminUserService.getByEmail(signUpRequest.getUserEmail()) == null){
+                adminUserService.getAdminByPhoneNumber(signUpRequest.getUserPhone()) == null &&
+                adminUserService.getAdminByEmail(signUpRequest.getUserEmail()) == null){
             if(signUpRequest.getUserRole().equalsIgnoreCase("Audience")){
                 UserRequest userRequest = new UserRequest(
                         signUpRequest.getUserName(), signUpRequest.getUserPhone(),

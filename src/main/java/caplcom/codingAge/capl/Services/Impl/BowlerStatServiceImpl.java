@@ -1,5 +1,6 @@
 package caplcom.codingAge.capl.Services.Impl;
 
+import caplcom.codingAge.capl.Models.BatterStat;
 import caplcom.codingAge.capl.Models.BowlerStat;
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Wicket;
@@ -8,6 +9,8 @@ import caplcom.codingAge.capl.Services.BowlerStatService;
 import caplcom.codingAge.capl.Services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BowlerStatServiceImpl implements BowlerStatService {
@@ -49,8 +52,14 @@ public class BowlerStatServiceImpl implements BowlerStatService {
     }
 
     @Override
-    public BowlerStat getBowlerStatByPlayerId(String playerId) {
-        return bowlerStatRepository.findByPlayerId(playerId);
+    public BowlerStat getBowlerStatByPlayerId(String scoreBoardId, String playerId) {
+        List<BowlerStat> bowlerStatList = bowlerStatRepository.findAllByScoreBoardId(scoreBoardId);
+        for (BowlerStat bowlerStat : bowlerStatList){
+            if(bowlerStat.getPlayerId().equals(playerId)){
+                return bowlerStat;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -70,6 +79,6 @@ public class BowlerStatServiceImpl implements BowlerStatService {
     public BowlerStat addWicketInBowlerStat(Wicket wicket) {
         BowlerStat bowlerStat = getBowlerStatById(wicket.getBowlerId());
         bowlerStat.getWicketsList().add(wicket);
-        bowlerStatRepository.save(bowlerStat);
+        return bowlerStatRepository.save(bowlerStat);
     }
 }

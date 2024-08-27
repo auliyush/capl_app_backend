@@ -3,6 +3,7 @@ package caplcom.codingAge.capl.Services;
 
 import caplcom.codingAge.capl.Models.Match;
 import caplcom.codingAge.capl.Models.MatchResult;
+import caplcom.codingAge.capl.Models.ScoreBoard;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchResult;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public interface MatchResultService {
 
     List<MatchResult> getMatchResultByTeamId(String teamId);
 
-    MatchResult createMatchResult(Match match);
+    MatchResult createMatchResult(String matchId, String teamFirstScoreBoardId, String teamSecondScoreBoardId);
 
 }
