@@ -109,6 +109,17 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Player getPlayerByJerseyNumber(Integer newBowlerJerseyNumber, String teamId) {
+        List<Player> playerList = getListOfPlayers(teamId);
+        for(Player player : playerList){
+            if(player.getJerseyNumber().equals(newBowlerJerseyNumber)){
+                return player;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Team> getListOfTeam() {
         return teamRepository.findAll();
     }

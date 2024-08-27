@@ -51,7 +51,7 @@ public class BatterStatServiceImpl implements BatterStatService {
         } else if (run == 6) {
             batterStat.setTotalSix(batterStat.getTotalSix() + 1);
         }
-        saveUpdates(batterStat);
+        batterStatRepository.save(batterStat);
         return true;
     }
 
@@ -59,8 +59,4 @@ public class BatterStatServiceImpl implements BatterStatService {
         return batterStatRepository.findByStatId(statId);
     }
 
-    @Override
-    public BatterStat saveUpdates(BatterStat batterStat) {
-        return batterStatRepository.save(batterStat);
-    }
 }

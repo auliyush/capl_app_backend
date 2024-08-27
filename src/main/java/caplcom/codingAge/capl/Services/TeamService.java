@@ -25,5 +25,8 @@ public interface TeamService {
     List<Team> getListOfTeam();
 
     boolean removePlayerFromTeam(String teamId, String playerId, String creatorId);
+
+    Player getPlayerByJerseyNumber(Integer newBowlerJerseyNumber, String teamId);
+
     Team saveUpdates(Team team);
 }

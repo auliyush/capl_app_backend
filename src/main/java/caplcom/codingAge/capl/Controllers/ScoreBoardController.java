@@ -1,6 +1,7 @@
 package caplcom.codingAge.capl.Controllers;
 
 import caplcom.codingAge.capl.Models.ScoreBoard;
+import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateBowler;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateScoreBoardRequest;
 import caplcom.codingAge.capl.Services.ScoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,10 @@ public class ScoreBoardController {
     public ScoreBoard updateScoreBoard(@RequestBody UpdateScoreBoardRequest updateScoreBoardRequest){
         return scoreBoardService.updateScoreBoard(updateScoreBoardRequest);
     }
-
+    @PutMapping("/change/bowler")
+    public ScoreBoard changeBowler(@RequestBody UpdateBowler updateBowler){
+        return scoreBoardService.updateBowler(updateBowler);
+    }
     @GetMapping("/list/scoreboard")
     List <ScoreBoard> getListOfScoreBoard () {
         return scoreBoardService.getListOfScoreBoard();

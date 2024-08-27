@@ -14,4 +14,6 @@ public interface PlayerRepository extends MongoRepository<Player, String> {
     Player findByPlayerPhone(String playerPhone);
 
     Player findByPlayerEmail(String playerEmail);
+
+    Player findByPlayerJerseyNumber(String newBowlerJerseyNumber);
 }

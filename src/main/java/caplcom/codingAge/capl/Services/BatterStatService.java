@@ -8,5 +8,4 @@ public interface BatterStatService {
 
     boolean addRunInStriker(String strikerId, int run);
      BatterStat getStatById(String statId);
-     BatterStat saveUpdates(BatterStat batterStat);
 }
