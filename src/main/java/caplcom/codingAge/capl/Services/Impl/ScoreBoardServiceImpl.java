@@ -112,6 +112,14 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     }
 
     @Override
+    public ScoreBoard addWicket(Wicket wicket) {
+        ScoreBoard scoreBoard = getScoreBoardById(wicket.getScoreBoardId());
+        scoreBoard.setNoOfWickets(scoreBoard.getNoOfWickets() + 1);
+        bowlerStatService.addWicketInBowlerStat(wicket);
+        return scoreBoardRepository.save(scoreBoard);
+    }
+
+    @Override
     public ScoreBoard updateBowler(UpdateBowler updateBowler) {
         ScoreBoard scoreBoard = getScoreBoardById(updateBowler.getScoreBoardId());
         if (!scoreBoard.isInning()) {

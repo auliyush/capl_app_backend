@@ -15,24 +15,24 @@ public class WicketController {
     @Autowired
    private WicketService wicketService;
 
-    @PostMapping("/bold")
+    @PostMapping("/create")
     public Wicket createWicket (@RequestBody WicketRequest wicketRequest) {
         return wicketService.createWicket(wicketRequest);
     }
 
-    @GetMapping("/wicket/byId")
-    public Wicket getWicketById (@RequestParam String wicketId) {
-        return wicketService.getWicketById(wicketId);
-    }
+//    @GetMapping("/wicket/byId")
+//    public Wicket getWicketById (@RequestParam String wicketId) {
+//        return wicketService.getWicketById(wicketId);
+//    }
 
     @GetMapping("/wickets/by/bowler")
     public List<Wicket> getWicketsByBowlerId (@RequestParam String bowlerId) {
         return wicketService.getWicketsByBowlerId(bowlerId);
     }
     // why need this api
-    @GetMapping("/wickets/by/batter")
-    public List<Wicket> getWicketsByBatterId(@RequestParam String batterId) {
-        return wicketService.getWicketsByBatterId(batterId);
-    }
+//    @GetMapping("/wicket/of/batter")
+//    public Wicket getWicketsByBatterId(@RequestParam String batterId, String scoreBoardId) {
+//        return wicketService.getWicketOfBatter(batterId, scoreBoardId);
+//    }
 
 }

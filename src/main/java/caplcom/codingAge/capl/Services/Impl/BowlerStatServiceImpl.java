@@ -2,6 +2,7 @@ package caplcom.codingAge.capl.Services.Impl;
 
 import caplcom.codingAge.capl.Models.BowlerStat;
 import caplcom.codingAge.capl.Models.Player;
+import caplcom.codingAge.capl.Models.Wicket;
 import caplcom.codingAge.capl.Repositories.BowlerStatRepository;
 import caplcom.codingAge.capl.Services.BowlerStatService;
 import caplcom.codingAge.capl.Services.PlayerService;
@@ -63,5 +64,12 @@ public class BowlerStatServiceImpl implements BowlerStatService {
         }
         bowlerStatRepository.save(bowlerStat);
         return true;
+    }
+
+    @Override
+    public BowlerStat addWicketInBowlerStat(Wicket wicket) {
+        BowlerStat bowlerStat = getBowlerStatById(wicket.getBowlerId());
+        bowlerStat.getWicketsList().add(wicket);
+        bowlerStatRepository.save(bowlerStat);
     }
 }

@@ -43,6 +43,9 @@ public class ScoreBoardController {
     public ScoreBoard changeBowler(@RequestBody UpdateBowler updateBowler){
         return scoreBoardService.updateBowler(updateBowler);
     }
+    //**
+    // todo implement an api for change new batter
+    //**
     @GetMapping("/list/scoreboard")
     List <ScoreBoard> getListOfScoreBoard () {
         return scoreBoardService.getListOfScoreBoard();

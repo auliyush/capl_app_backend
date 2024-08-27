@@ -12,6 +12,8 @@ public interface WicketRepository extends MongoRepository<Wicket, String> {
 
     List<Wicket> findByBowlerId(String bowlerId);
 
-    List<Wicket> findByBatterId(String batterId);
+//    List<Wicket> findByBatterId(String batterId);
     Wicket findByBatterIdAndTeamId(String batterId, String teamId);
+
+    List<Wicket> findByScoreBoardId(String scoreBoardId);
 }

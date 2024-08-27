@@ -1,6 +1,7 @@
 package caplcom.codingAge.capl.Services;
 
 import caplcom.codingAge.capl.Models.BowlerStat;
+import caplcom.codingAge.capl.Models.Wicket;
 
 public interface BowlerStatService {
     BowlerStat createInningBowlerStats(String scoreBoardId, String teamId, String playerId);
@@ -9,4 +10,6 @@ public interface BowlerStatService {
     boolean addExtraRunInBowlerStats(Integer extraRun, String bowlerId);
 
     boolean addRunInBowler(String bowlerId, Integer run);
+
+    BowlerStat addWicketInBowlerStat(Wicket wicket);
 }

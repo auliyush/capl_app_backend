@@ -12,5 +12,5 @@ public interface WicketService {
 
     List<Wicket> getWicketsByBowlerId(String bowlerId);
 
-    List<Wicket> getWicketsByBatterId(String batterId);
+    Wicket getWicketOfBatter(String batterId, String scoreBoardId);
 }
