@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection ="batterStats")
+@Document(collection ="BatterStats")
 @AllArgsConstructor
 @NoArgsConstructor
 public class BatterStat {

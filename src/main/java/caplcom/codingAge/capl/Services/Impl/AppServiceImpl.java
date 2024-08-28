@@ -59,7 +59,7 @@ public class AppServiceImpl implements AppService {
                 playerService.getByEmail(signUpRequest.getUserEmail()) == null &&
                 adminUserService.getAdminByPhoneNumber(signUpRequest.getUserPhone()) == null &&
                 adminUserService.getAdminByEmail(signUpRequest.getUserEmail()) == null){
-            if(signUpRequest.getUserRole().equalsIgnoreCase("Audience")){
+            if(signUpRequest.getUserRole().equalsIgnoreCase("USER")){
                 UserRequest userRequest = new UserRequest(
                         signUpRequest.getUserName(), signUpRequest.getUserPhone(),
                         signUpRequest.getUserEmail(), signUpRequest.getUserPassword()
@@ -72,7 +72,7 @@ public class AppServiceImpl implements AppService {
                         signUpRequest.getUserEmail(), signUpRequest.getUserPassword());
                 playerService.createPlayer(playerRequest);
                 return true;
-            }else {
+            }else if (signUpRequest.getUserRole().equalsIgnoreCase("ADMIN")){
                 UserRequest userRequest = new UserRequest(
                         signUpRequest.getUserName(), signUpRequest.getUserPhone(),
                         signUpRequest.getUserEmail(), signUpRequest.getUserPassword());

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Document(collection ="bowlerStats")
+@Document(collection ="BowlerStats")
 @AllArgsConstructor
 @NoArgsConstructor
 public class BowlerStat {

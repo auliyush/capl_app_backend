@@ -7,6 +7,7 @@ import caplcom.codingAge.capl.Models.request.CreateRequests.UserRequest;
 
 public interface AppService {
     boolean signUp(SignUpRequest signUpRequest);
+
     LoginResponse login(String phoneNumber, String password);
 
 }
