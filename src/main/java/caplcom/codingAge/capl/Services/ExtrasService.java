@@ -2,7 +2,6 @@ package caplcom.codingAge.capl.Services;
 
 import caplcom.codingAge.capl.Models.Extras;
 import caplcom.codingAge.capl.Models.request.CreateRequests.ExtrasRequest;
-import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateExtras;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface ExtrasService {
 
     Extras getExtrasById(String id);
 
-    List<Extras> getExtrasByTeamId(String teamId);
+    Extras getExtrasByScoreBoardId(String scoreBoardId);
 
 //    Extras updateExtrasById(UpdateExtras updateExtras);
 // there is no need of update extras

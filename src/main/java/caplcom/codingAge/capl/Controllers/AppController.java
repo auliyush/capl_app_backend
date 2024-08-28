@@ -1,9 +1,11 @@
 package caplcom.codingAge.capl.Controllers;
 
+import caplcom.codingAge.capl.Base.ApiResponse;
 import caplcom.codingAge.capl.Models.Response.LoginResponse;
 import caplcom.codingAge.capl.Models.request.CreateRequests.SignUpRequest;
 import caplcom.codingAge.capl.Services.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,12 +16,12 @@ public class AppController {
     private AppService appService;
 
     @PostMapping("/signUp")
-    public boolean signUp(@RequestBody SignUpRequest signUpRequest){
-        return appService.signUp(signUpRequest);
+    public ApiResponse<Boolean> signUp(@RequestBody SignUpRequest signUpRequest){
+        return new ApiResponse<>(appService.signUp(signUpRequest), HttpStatus.OK);
     }
     @PostMapping("/login")
-    public LoginResponse login(@RequestParam String phoneNumber, String password){
-        return appService.login(phoneNumber,password);
+    public ApiResponse<LoginResponse> login(@RequestParam String phoneNumber, String password){
+        return new ApiResponse<>(appService.login(phoneNumber,password), HttpStatus.OK);
     }
 }
 // this is checked 28/08/2024  12:20

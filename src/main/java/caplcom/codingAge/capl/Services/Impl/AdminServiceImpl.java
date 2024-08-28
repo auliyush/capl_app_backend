@@ -1,5 +1,6 @@
 package caplcom.codingAge.capl.Services.Impl;
 
+import caplcom.codingAge.capl.Exception.ApplicationException;
 import caplcom.codingAge.capl.Models.AdminUser;
 import caplcom.codingAge.capl.Models.request.CreateRequests.UserRequest;
 import caplcom.codingAge.capl.Repositories.AdminUserRepository;
@@ -29,7 +30,7 @@ public class AdminServiceImpl implements AdminUserService {
         if(adminUser != null){
             return adminUser;
         }else {
-            return null;
+            throw new ApplicationException("Admin not found");
         }
     }
 

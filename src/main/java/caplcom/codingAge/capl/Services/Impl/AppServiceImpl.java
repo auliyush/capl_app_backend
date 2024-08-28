@@ -1,5 +1,6 @@
 package caplcom.codingAge.capl.Services.Impl;
 
+import caplcom.codingAge.capl.Exception.ApplicationException;
 import caplcom.codingAge.capl.Models.AdminUser;
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Response.LoginResponse;
@@ -29,7 +30,7 @@ public class AppServiceImpl implements AppService {
             if(user.getUserPassword().equals(password)){
                 return new LoginResponse(user.getUserId(), "USER");
             }else {
-                return null;
+                throw new ApplicationException("mobile Number or Password Not Matched");
             }
         }
         Player player = playerService.getByPhoneNumber(phoneNumber);
@@ -37,7 +38,7 @@ public class AppServiceImpl implements AppService {
             if(player.getPlayerPassword().equals(password)){
                 return new LoginResponse(player.getPlayerId(), "PLAYER");
             }else {
-                return null;
+                throw new ApplicationException("mobile Number or Password Not Matched");
             }
         }
         AdminUser adminUser = adminUserService.getAdminByPhoneNumber(phoneNumber);
@@ -45,7 +46,7 @@ public class AppServiceImpl implements AppService {
             if(adminUser.getAdminPassword().equals(password)){
                 return new LoginResponse(adminUser.getAdminId(), "ADMIN");
             }else {
-                return null;
+                throw new ApplicationException("mobile Number or Password Not Matched");
             }
         }
         return null;
@@ -80,6 +81,6 @@ public class AppServiceImpl implements AppService {
                 return true;
             }
         }
-        return false;
+        throw new ApplicationException("Mobile Number or E-Mail already Exists");
     }
 }

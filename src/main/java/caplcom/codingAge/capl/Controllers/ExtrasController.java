@@ -1,10 +1,11 @@
 package caplcom.codingAge.capl.Controllers;
 
+import caplcom.codingAge.capl.Base.ApiResponse;
 import caplcom.codingAge.capl.Models.Extras;
 import caplcom.codingAge.capl.Models.request.CreateRequests.ExtrasRequest;
-import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateExtras;
 import caplcom.codingAge.capl.Services.ExtrasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class ExtrasController {
     private ExtrasService extrasService;
 
     @PostMapping("/create")
-    public Extras createExtras(@RequestBody ExtrasRequest extrasRequest) {
-        return extrasService.createExtras(extrasRequest);
+    public ApiResponse<Extras> createExtras(@RequestBody ExtrasRequest extrasRequest) {
+        return new ApiResponse<>(extrasService.createExtras(extrasRequest), HttpStatus.ACCEPTED);
     }
 //    @GetMapping("/{id}")
 //    Extras getExtrasById(String id) {
@@ -26,9 +27,9 @@ public class ExtrasController {
 
     // todo think there is no need of get by team id in controller because list of extras already
     //  exists in scoreboard
-    @GetMapping("/byTeamId")
-    public List<Extras> getExtrasByTeamId(String teamId) {
-        return extrasService.getExtrasByTeamId(teamId);
+    @GetMapping("/byScoreBoardId")
+    public ApiResponse<Extras> getExtrasByScoreBoardId(String scoreBoardId) {
+        return new ApiResponse<>(extrasService.getExtrasByScoreBoardId(scoreBoardId), HttpStatus.OK);
     }
 
 //    @PutMapping("/update")

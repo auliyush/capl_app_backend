@@ -97,7 +97,6 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         ScoreBoard scoreBoard = getScoreBoardById(extras.getScoreBoardId());
         if (scoreBoard.isInning()) {
             scoreBoard.setTotalRuns(scoreBoard.getTotalRuns() + extras.getExtraRun());
-            scoreBoard.getExtrasList().add(extras);
             for (BowlerStat bowlerStat : scoreBoard.getBowlerStatList()) {
                 if (bowlerStat.getStatId().equals(scoreBoard.getBowlerId())) {
                     bowlerStatService.addExtraRunInBowlerStats(extras.getExtraRun(), bowlerStat.getStatId());

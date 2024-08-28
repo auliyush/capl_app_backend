@@ -1,6 +1,7 @@
 package caplcom.codingAge.capl.Services.Impl;
 
 
+import caplcom.codingAge.capl.Exception.ApplicationException;
 import caplcom.codingAge.capl.Models.Extras;
 import caplcom.codingAge.capl.Models.ScoreBoard;
 import caplcom.codingAge.capl.Models.request.CreateRequests.ExtrasRequest;
@@ -24,10 +25,21 @@ public class ExtrasServiceImpl implements ExtrasService {
 
     @Override
     public Extras createExtras(ExtrasRequest extrasRequest) {
+        ScoreBoard scoreBoard = scoreBoardService.getScoreBoardById(extrasRequest.getScoreBoardId());
+        List<Extras> extrasList = scoreBoard.getExtrasList();
+        for(Extras extras : extrasList){
+            if(extras.getExtraDescription().equals(extrasRequest.getExtraDescription())){
+                extras.setExtraRun(extras.getExtraRun() + extrasRequest.getExtraRuns());
+                scoreBoard.setExtrasList(extrasList);
+                scoreBoardService.addExtrasRun(extras);
+
+                return extrasRepository.save(extras);
+            }
+        }
         Extras extras = new Extras();
         extras.setExtraDescription(extrasRequest.getExtraDescription());
         extras.setExtraRun(extrasRequest.getExtraRuns());
-        scoreBoardService.addExtrasRun(extras);
+        scoreBoard.getExtrasList().add(extras);
         return extrasRepository.save(extras);
     }
 
@@ -41,12 +53,13 @@ public class ExtrasServiceImpl implements ExtrasService {
     }
 
     @Override
-    public List<Extras> getExtrasByTeamId(String teamId) {
-        List<Extras> extrasList = extrasRepository.findByTeamId(teamId);
-        if (extrasList != null) {
+    public Extras getExtrasByScoreBoardId(String scoreBoardId) {
+        Extras extrasList = extrasRepository.findByScoreBoardId(scoreBoardId);
+        if(extrasList != null) {
             return extrasList;
+        }else {
+            throw new ApplicationException("extras not found");
         }
-        return new ArrayList<>();
     }
 
 

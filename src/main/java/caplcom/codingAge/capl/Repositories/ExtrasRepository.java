@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ExtrasRepository extends MongoRepository<Extras, String> {
-
-    List<Extras> findByTeamId(String teamId);
+    Extras findByScoreBoardId(String teamId);
 }
