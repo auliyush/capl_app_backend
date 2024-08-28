@@ -51,6 +51,12 @@ public class TeamController {
     public boolean removePlayerFromTeam(@RequestParam String teamId, String playerId, String creatorId){
      return teamService.removePlayerFromTeam(teamId, playerId, creatorId);
     }
+
+    @GetMapping("listOf/player/ByRole/from/Team")
+    public List<Player> getListOfPlayerByRoleFromTeam(@RequestParam String teamId, String playerRole){
+        return teamService.getListOfPlayerByRoleFromTeam(teamId, playerRole);
+    }
+
     @GetMapping("/listOf/Teams")
     public List<Team> getListOfTeam(){
         return teamService.getListOfTeam();

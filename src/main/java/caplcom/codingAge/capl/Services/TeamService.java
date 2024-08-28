@@ -29,4 +29,6 @@ public interface TeamService {
     Player getPlayerByJerseyNumber(Integer newBowlerJerseyNumber, String teamId);
 
     Team saveUpdates(Team team);
+
+    List<Player> getListOfPlayerByRoleFromTeam(String teamId, String playerRole);
 }

@@ -3,6 +3,7 @@ package caplcom.codingAge.capl.Services.Impl;
 
 import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.request.CreateRequests.PlayerRequest;
+import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdatePlayer;
 import caplcom.codingAge.capl.Repositories.PlayerRepository;
 import caplcom.codingAge.capl.Services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,28 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public Player updatePlayer(UpdatePlayer updatePlayer) {
+        Player player = getPlayerById(updatePlayer.getPlayerId());
+        if(player == null){
+            return null;
+        }
+        if(getByPhoneNumber(updatePlayer.getPlayerPhone()) != null &&
+                getByEmail(updatePlayer.getPlayerEmail()) != null){
+            return null;
+        }
+        player.setPlayerProfilePhotoUrl(updatePlayer.getPlayerProfilePhotoUrl());
+        player.setPlayerName(updatePlayer.getPlayerName());
+        player.setPlayerNickName(updatePlayer.getPlayerNickName());
+        player.setPlayerPhone(updatePlayer.getPlayerPhone());
+        player.setPlayerEmail(updatePlayer.getPlayerEmail());
+        player.setPlayerDob(updatePlayer.getPlayerDob());
+        player.setPlayerAddress(updatePlayer.getPlayerAddress());
+        player.setPlayerType(updatePlayer.getPlayerType());
+        player.setPlayerPassword(updatePlayer.getPlayerPassword());
+        return playerRepository.save(player);
+    }
+
+    @Override
     public Player getByPhoneNumber(String phoneNumber) {
         return playerRepository.findByPlayerPhone(phoneNumber);
     }
@@ -50,6 +73,12 @@ public class PlayerServiceImpl implements PlayerService {
     public List<Player> getListOfPlayer() {
         return playerRepository.findAll();
     }
+
+    @Override
+    public List<Player> getListOfPlayerByRole(String playerRole) {
+        return playerRepository.findAllByPlayerType(playerRole);
+    }
+
 
     @Override
     public Player saveUpdates(Player player) {

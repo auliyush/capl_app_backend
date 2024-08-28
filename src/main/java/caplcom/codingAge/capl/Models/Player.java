@@ -15,13 +15,14 @@ public class Player{
     @Id
     private String playerId;
     private String playerName;
+    private String playerProfilePhotoUrl;
+    private String playerNickName;
     private String playerPhone;
     private String playerEmail;
     private String playerPassword;
     private String playerDob;
     private String playerAddress;
     private String playerType;
-    private String playerJerseyNumber;
     private Integer jerseyNumber;
     private String economyRate;
     private String strikeRate;

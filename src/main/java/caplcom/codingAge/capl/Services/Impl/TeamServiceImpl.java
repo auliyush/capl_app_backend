@@ -124,6 +124,21 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public List<Player> getListOfPlayerByRoleFromTeam(String teamId, String playerRole) {
+        Team team = teamRepository.findByTeamId(teamId);
+        if(team == null){
+            return null;
+        }
+        List<Player> playerListByRole = new ArrayList<>();
+        for (Player player : team.getPlayerList()){
+            if(player.getPlayerType().equals(playerRole)){
+                playerListByRole.add(player);
+            }
+        }
+        return playerListByRole;
+    }
+
+    @Override
     public Team saveUpdates(Team team) {
         return teamRepository.save(team);
     }
