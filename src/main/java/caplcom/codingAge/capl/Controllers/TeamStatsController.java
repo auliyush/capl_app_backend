@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/capl/teamstats")
+@CrossOrigin(origins = "*")
 public class TeamStatsController {
     @Autowired
     private TeamStatsService teamStatsService;

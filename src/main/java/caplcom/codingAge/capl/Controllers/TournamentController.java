@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/capl/tournament")
+@CrossOrigin(origins = "*")
 public class TournamentController {
     @Autowired
     private TournamentService tournamentService;

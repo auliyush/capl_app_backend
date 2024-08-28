@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/wicket")
+@CrossOrigin(origins = "*")
 public class WicketController {
 
     @Autowired

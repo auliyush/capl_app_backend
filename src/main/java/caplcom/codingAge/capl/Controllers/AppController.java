@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/app/")
+@RequestMapping("/app")
+@CrossOrigin(origins = "*")
 public class AppController {
 
     @Autowired
