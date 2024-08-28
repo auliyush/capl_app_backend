@@ -28,10 +28,12 @@ public class MatchController {
 //    public List<Match> getMatchesByTeamId(@RequestParam String teamId){
 //        return matchService.getMatchesByTeamId(teamId);
 //    }
+
+    //todo currently this method is not used because error of cycle creating think update match
+    // where exists
     @PutMapping("/update/match")
     public Match updateMatch(@RequestParam String matchId){
         return matchService.updateMatch(matchId);
     }
 }
-// not proper please check
-// this is checked 25/08/2024
+// this is checked 28/08/2024  12:20

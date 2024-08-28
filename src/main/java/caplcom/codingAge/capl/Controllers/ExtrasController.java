@@ -24,6 +24,8 @@ public class ExtrasController {
 //        return extrasService.getExtrasById(id);
 //    }
 
+    // todo think there is no need of get by team id in controller because list of extras already
+    //  exists in scoreboard
     @GetMapping("/byTeamId")
     public List<Extras> getExtrasByTeamId(String teamId) {
         return extrasService.getExtrasByTeamId(teamId);
@@ -37,4 +39,4 @@ public class ExtrasController {
     // there is no need of update extras
 }
 
-// i haven't checked it yet
+// this is checked 28/08/2024  12:20

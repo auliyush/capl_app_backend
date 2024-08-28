@@ -10,7 +10,6 @@ import caplcom.codingAge.capl.Repositories.TeamRepository;
 import caplcom.codingAge.capl.Services.AdminUserService;
 import caplcom.codingAge.capl.Services.PlayerService;
 import caplcom.codingAge.capl.Services.TeamService;
-import caplcom.codingAge.capl.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private AdminUserService adminUserService;
     public Team createTeam(TeamRequest teamRequest) {
-        if(adminUserService.getAdminUserByUserId(teamRequest.getTeamCreatorId()) != null){
+        if(adminUserService.getAdminUserById(teamRequest.getTeamCreatorId()) != null){
             Team team = new Team();
             team.setTeamCreatorId(teamRequest.getTeamCreatorId());
             team.setTeamName(teamRequest.getTeamName());

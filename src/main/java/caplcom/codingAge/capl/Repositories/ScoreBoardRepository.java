@@ -12,4 +12,6 @@ public interface ScoreBoardRepository extends MongoRepository <ScoreBoard, Strin
     List<ScoreBoard> findAllByMatchId(String firstTeamId);
 
     ScoreBoard findByMatchId(String matchId);
+
+    ScoreBoard findByScoreBoardId(String scoreBoardId);
 }

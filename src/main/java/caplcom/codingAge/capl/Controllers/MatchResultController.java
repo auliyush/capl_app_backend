@@ -2,6 +2,7 @@ package caplcom.codingAge.capl.Controllers;
 
 
 import caplcom.codingAge.capl.Models.MatchResult;
+import caplcom.codingAge.capl.Models.request.CreateRequests.MatchResultRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchResult;
 import caplcom.codingAge.capl.Services.MatchResultService;
 import caplcom.codingAge.capl.Services.MatchService;
@@ -18,9 +19,8 @@ public class MatchResultController {
     private MatchResultService matchResultService;
 
     @PostMapping("/create")
-    public MatchResult createMatchResult(@RequestParam String matchId,
-                                         String firstTeamScoreBoardId, String secondTeamScoreBoardId){
-        return matchResultService.createMatchResult(matchId, firstTeamScoreBoardId, secondTeamScoreBoardId);
+    public MatchResult createMatchResult(@RequestBody MatchResultRequest matchResultRequest){
+        return matchResultService.createMatchResult(matchResultRequest);
     }
     @GetMapping("/byMatchId")
     public MatchResult getMatchResultByMatchId(String matchId) {
@@ -32,4 +32,4 @@ public class MatchResultController {
         return matchResultService.getMatchResultByTeamId(teamId);
     }
 }
-// this is checked 25/08/2024
+// this is checked 28/08/2024  12:20

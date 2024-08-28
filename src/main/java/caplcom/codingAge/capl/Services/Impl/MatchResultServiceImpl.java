@@ -39,10 +39,12 @@ public class MatchResultServiceImpl implements MatchResultService {
     }
 
     @Override
-    public MatchResult createMatchResult(String matchId, String teamFirstScoreBoardId, String teamSecondScoreBoardId) {
-        Match match = matchService.getMatchById(matchId);
-        ScoreBoard teamFirstScoreBoard = scoreBoardService.getScoreBoardById(teamFirstScoreBoardId);
-        ScoreBoard teamSecondScoreBoard = scoreBoardService.getScoreBoardById(teamSecondScoreBoardId);
+    public MatchResult createMatchResult(MatchResultRequest matchResultRequest) {
+        Match match = matchService.getMatchById(matchResultRequest.getMatchId());
+        ScoreBoard teamFirstScoreBoard = scoreBoardService.getScoreBoardById(matchResultRequest.getFirstTeamScoreBoardId());
+        ScoreBoard teamSecondScoreBoard = scoreBoardService.getScoreBoardById(matchResultRequest.getSecondTeamScoreBoardId());
+
+        //creating MatchResult Object
         MatchResult matchResult = new MatchResult();
         matchResult.setMatchId(match.getMatchId());
         matchResult.setTournamentId(match.getTournamentId());
@@ -54,6 +56,7 @@ public class MatchResultServiceImpl implements MatchResultService {
         matchResult.setSecondTeamTotalRuns(teamSecondScoreBoard.getTotalRuns());
         matchResult.setSecondTeamTotalWickets(teamSecondScoreBoard.getTotalWickets());
 
+        // calculate ManOfTheMatch
         int highestRunPlayer1 = -99;
         int highestWicketPlayer1 = -99;
         int highestRunPlayer2 = -99;

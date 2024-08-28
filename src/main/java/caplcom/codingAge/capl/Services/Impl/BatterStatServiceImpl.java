@@ -43,7 +43,7 @@ public class BatterStatServiceImpl implements BatterStatService {
     }
 
     @Override
-    public boolean addRunInStriker(String strikerId, int run) {
+    public BatterStat addRunInStriker(String strikerId, int run) {
         BatterStat batterStat = getStatById(strikerId);
         batterStat.setTotalRuns(batterStat.getTotalRuns() + run);
         if(run == 4){
@@ -51,8 +51,7 @@ public class BatterStatServiceImpl implements BatterStatService {
         } else if (run == 6) {
             batterStat.setTotalSix(batterStat.getTotalSix() + 1);
         }
-        batterStatRepository.save(batterStat);
-        return true;
+        return batterStatRepository.save(batterStat);
     }
 
     public BatterStat getStatById(String statId) {

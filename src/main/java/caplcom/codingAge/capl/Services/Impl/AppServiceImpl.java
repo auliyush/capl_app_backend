@@ -72,7 +72,6 @@ public class AppServiceImpl implements AppService {
                         signUpRequest.getUserEmail(), signUpRequest.getUserPassword());
                 playerService.createPlayer(playerRequest);
                 return true;
-                // only make every class  object and make signUp
             }else {
                 UserRequest userRequest = new UserRequest(
                         signUpRequest.getUserName(), signUpRequest.getUserPhone(),

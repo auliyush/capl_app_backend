@@ -20,12 +20,14 @@ public interface ScoreBoardService {
     ScoreBoard updateScoreBoard(UpdateScoreBoardRequest updateScoreBoardRequest);
 
     boolean addExtrasRun(Extras extras);
-    List<ScoreBoard> getListOfScoreBoard();
-    boolean addRuns(String scoreBoardId, Integer run);
+
+    ScoreBoard addRuns(String scoreBoardId, Integer run);
 
     ScoreBoard updateBowler(UpdateBowler updateBowler);
 
     ScoreBoard addWicket(Wicket wicket);
 
     ScoreBoard updateBatter(UpdateBatter updateBatter);
+
+    List<ScoreBoard> getListOfScoreBoard();
 }

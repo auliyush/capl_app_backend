@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminUserService {
     }
 
     @Override
-    public AdminUser getAdminUserByUserId(String adminId) {
+    public AdminUser getAdminUserById(String adminId) {
         AdminUser adminUser = adminUserRepository.findByAdminId(adminId);
         if(adminUser != null){
             return adminUser;

@@ -34,7 +34,7 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
 
     @Override
     public ScoreBoard getScoreBoardById(String scoreBoardId) {
-        return scoreBoardRepository.findById(scoreBoardId).orElse(null);
+        return scoreBoardRepository.findByScoreBoardId(scoreBoardId);
     }
 
     @Override
@@ -48,33 +48,45 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         return null;
     }
 
-    // update scoreBoard api for create initial stats of scoreboard when tap on button start match
-// after create match
     @Override
     public ScoreBoard updateScoreBoard(UpdateScoreBoardRequest updateScoreBoardRequest) {
         ScoreBoard scoreBoard = getScoreBoardByMatchAndTeamId(updateScoreBoardRequest.getTeamId(),
                 updateScoreBoardRequest.getMatchId());
         if (scoreBoard != null) {
+            if (!scoreBoard.isInning()) {
+                return null;
+            }
             if (batterStatService.getBatterStatByPlayerId(updateScoreBoardRequest.getStrikerId(),
                     scoreBoard.getScoreBoardId()) == null) {
                 BatterStat striker = batterStatService.createInningBatterStats(scoreBoard.getScoreBoardId(),
-                        scoreBoard.getTeamId(), scoreBoard.getStrikerId());
+                        scoreBoard.getTeamId(), updateScoreBoardRequest.getStrikerId());
                 scoreBoard.getBatterStatList().add(striker);
                 scoreBoard.setStrikerId(striker.getStatId());
+            } else {
+                return null;
             }
             if (batterStatService.getBatterStatByPlayerId(updateScoreBoardRequest.getNonStrikerId(),
                     scoreBoard.getScoreBoardId()) == null) {
                 BatterStat nonStriker = batterStatService.createInningBatterStats(scoreBoard.getScoreBoardId(),
-                        scoreBoard.getTeamId(), scoreBoard.getNonStrikerId());
+                        scoreBoard.getTeamId(), updateScoreBoardRequest.getNonStrikerId());
                 scoreBoard.getBatterStatList().add(nonStriker);
                 scoreBoard.setNonStrikerId(nonStriker.getStatId());
             }
             Match match = matchService.getMatchById(updateScoreBoardRequest.getMatchId());
             String teamId = (match.getFirstTeamId().equals(updateScoreBoardRequest.getTeamId()))
                     ? match.getSecondTeamId() : match.getFirstTeamId();
-            scoreBoard.getBowlerStatList().add(bowlerStatService.createInningBowlerStats(scoreBoard.getScoreBoardId(), teamId,
-                    updateScoreBoardRequest.getBowlerId()));
-            // create initial bowler stat of from opposite team opening time
+
+            BowlerStat bowlerStat = bowlerStatService.getBowlerStatByPlayerId(scoreBoard.getScoreBoardId(),
+                    scoreBoard.getBowlerId());
+            if (bowlerStat == null) {
+                bowlerStat = bowlerStatService.createInningBowlerStats(scoreBoard.getScoreBoardId(),
+                        teamId, updateScoreBoardRequest.getBowlerId());
+                scoreBoard.getBowlerStatList().add(bowlerStat);
+                scoreBoard.setBowlerId(bowlerStat.getStatId());
+            } else {
+                scoreBoard.getBowlerStatList().add(bowlerStat);
+                scoreBoard.setBowlerId(bowlerStat.getStatId());
+            }
             return scoreBoardRepository.save(scoreBoard);
         }
         return null;
@@ -97,14 +109,17 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     }
 
     @Override
-    public boolean addRuns(String scoreBoardId, Integer run) {
-        ScoreBoard scoreBoard = scoreBoardRepository.findById(scoreBoardId).orElse(null);
+    public ScoreBoard addRuns(String scoreBoardId, Integer run) {
+        ScoreBoard scoreBoard = scoreBoardRepository.findByScoreBoardId(scoreBoardId);
         if (scoreBoard != null) {
+            if(!scoreBoard.isInning()){
+                return null;
+            }
             scoreBoard.setTotalRuns(scoreBoard.getTotalRuns() + run);
         }
         batterStatService.addRunInStriker(scoreBoard.getStrikerId(), run);
         bowlerStatService.addRunInBowler(scoreBoard.getBowlerId(), run);
-        return true;
+        return scoreBoardRepository.save(scoreBoard);
     }
 
     @Override
@@ -118,6 +133,9 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     @Override
     public ScoreBoard updateBowler(UpdateBowler updateBowler) {
         ScoreBoard scoreBoard = getScoreBoardById(updateBowler.getScoreBoardId());
+        if(scoreBoard == null){
+            return null;
+        }
         if (!scoreBoard.isInning()) {
             return null;
         }
@@ -129,9 +147,10 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
             BowlerStat bowlerStat = bowlerStatService.getBowlerStatByPlayerId(
                     scoreBoard.getScoreBoardId(), player.getPlayerId());
             if (bowlerStat == null) {
-                BowlerStat bowlerStat1 = bowlerStatService.createInningBowlerStats(
+                 bowlerStat = bowlerStatService.createInningBowlerStats(
                         scoreBoard.getScoreBoardId(), teamId, player.getPlayerId());
-                scoreBoard.setBowlerId(bowlerStat1.getStatId());
+                scoreBoard.setBowlerId(bowlerStat.getStatId());
+                scoreBoard.getBowlerStatList().add(bowlerStat);
                 scoreBoardRepository.save(scoreBoard);
             } else {
                 scoreBoard.setBowlerId(bowlerStat.getStatId());
@@ -140,42 +159,41 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
         } else {
             return null;
         }
-        scoreBoardRepository.save(scoreBoard);
-        return null;
+       return scoreBoardRepository.save(scoreBoard);
     }
 
     @Override
     public ScoreBoard updateBatter(UpdateBatter updateBatter) {
         ScoreBoard scoreBoard = getScoreBoardById(updateBatter.getScoreBoardId());
-        if(!scoreBoard.isInning()){
+        if (scoreBoard == null){
             return null;
         }
-        Match match = matchService.getMatchById(scoreBoard.getMatchId());
+        if (!scoreBoard.isInning()) {
+            return null;
+        }
+//        Match match = matchService.getMatchById(scoreBoard.getMatchId());
         Player player = teamService.getPlayerByJerseyNumber(
                 updateBatter.getNewBatterJerseyNumber(), scoreBoard.getTeamId());
-        if(player != null){
+        if (player != null) {
             BatterStat batterStat = batterStatService.getBatterStatByPlayerId(
                     updateBatter.getNewBatterId(), scoreBoard.getScoreBoardId());
-            if(batterStat == null){
-                BatterStat batterStat1 = batterStatService.createInningBatterStats(
+            if (batterStat == null) {
+                 batterStat = batterStatService.createInningBatterStats(
                         scoreBoard.getScoreBoardId(), scoreBoard.getTeamId(),
                         updateBatter.getNewBatterId());
-                if(scoreBoard.getStrikerId().equals(updateBatter.getPreviousBatterId())){
-                    scoreBoard.setStrikerId(updateBatter.getNewBatterId());
-                }else {
-                    scoreBoard.setNonStrikerId(updateBatter.getNewBatterId());
+                if (scoreBoard.getStrikerId().equals(updateBatter.getPreviousBatterId())) {
+                    scoreBoard.setStrikerId(batterStat.getStatId());
+                } else {
+                    scoreBoard.setNonStrikerId(batterStat.getStatId());
                 }
                 scoreBoardRepository.save(scoreBoard);
             }else {
-                    if(scoreBoard.getStrikerId().equals(updateBatter.getPreviousBatterId())){
-                        scoreBoard.setStrikerId(updateBatter.getNewBatterId());
-                    }else {
-                        scoreBoard.setNonStrikerId(updateBatter.getNewBatterId());
-                    }
-                    scoreBoardRepository.save(scoreBoard);
+                return null;
             }
+        }else {
+            return null;
         }
-        return null;
+        return scoreBoardRepository.save(scoreBoard);
     }
 
     @Override

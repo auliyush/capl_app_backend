@@ -35,7 +35,7 @@ public class TournamentServiceImpl implements TournamentService {
     public Tournament createTournament(TournamentRequest tournamentRequest) {
 
 
-        AdminUser adminUser = adminUserService.getAdminUserByUserId(tournamentRequest.getCreatorId());
+        AdminUser adminUser = adminUserService.getAdminUserById(tournamentRequest.getCreatorId());
 
         if (adminUser == null) {
             return new Tournament();

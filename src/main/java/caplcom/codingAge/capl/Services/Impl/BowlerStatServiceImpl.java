@@ -63,7 +63,7 @@ public class BowlerStatServiceImpl implements BowlerStatService {
     }
 
     @Override
-    public boolean addRunInBowler(String bowlerId, Integer run) {
+    public BowlerStat addRunInBowler(String bowlerId, Integer run) {
         BowlerStat bowlerStat = getBowlerStatById(bowlerId);
         bowlerStat.setTotalRuns(bowlerStat.getTotalRuns() + run);
         if (run == 4) {
@@ -71,8 +71,7 @@ public class BowlerStatServiceImpl implements BowlerStatService {
         } else if (run == 6) {
             bowlerStat.setTotalSix(bowlerStat.getTotalSix() + 1);
         }
-        bowlerStatRepository.save(bowlerStat);
-        return true;
+        return bowlerStatRepository.save(bowlerStat);
     }
 
     @Override

@@ -2,15 +2,12 @@ package caplcom.codingAge.capl.Services.Impl;
 
 import caplcom.codingAge.capl.Models.*;
 import caplcom.codingAge.capl.Models.request.CreateRequests.MatchRequest;
-import caplcom.codingAge.capl.Models.request.CreateRequests.MatchResultRequest;
-import caplcom.codingAge.capl.Models.request.CreateRequests.ScoreBoardRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateMatchRequest;
 import caplcom.codingAge.capl.Repositories.MatchRepository;
 import caplcom.codingAge.capl.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -25,7 +22,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Match createMatch(MatchRequest matchRequest) {
-        if (adminUserService.getAdminUserByUserId(matchRequest.getCreatorId()) != null) {
+        if (adminUserService.getAdminUserById(matchRequest.getCreatorId()) != null) {
             Team firstTeam = teamService.getTeamById(matchRequest.getFirstTeamId());
             Team secondTeam = teamService.getTeamById(matchRequest.getSecondTeamId());
             if(firstTeam != null && secondTeam != null) {
