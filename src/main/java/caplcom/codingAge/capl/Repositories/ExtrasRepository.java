@@ -10,5 +10,5 @@ import java.util.List;
 public interface ExtrasRepository extends MongoRepository<Extras, String> {
     Extras findByScoreBoardId(String teamId);
 
-    Extras findByIdExtrasId(String id);
+    Extras findByExtrasId(String id);
 }

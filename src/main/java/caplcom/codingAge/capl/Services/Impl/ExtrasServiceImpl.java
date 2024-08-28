@@ -44,7 +44,7 @@ public class ExtrasServiceImpl implements ExtrasService {
 
     @Override
     public Extras getExtrasById(String id) {
-        return extrasRepository.findByIdExtrasId(id);
+        return extrasRepository.findByExtrasId(id);
     }
 
     @Override
