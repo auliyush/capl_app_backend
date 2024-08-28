@@ -17,12 +17,12 @@ public class AppController {
     private AppService appService;
 
     @PostMapping("/signUp")
-    public ApiResponse<Boolean> signUp(@RequestBody SignUpRequest signUpRequest){
-        return new ApiResponse<>(appService.signUp(signUpRequest), HttpStatus.OK);
+    public Boolean signUp(@RequestBody SignUpRequest signUpRequest){
+        return appService.signUp(signUpRequest);
     }
     @PostMapping("/login")
-    public ApiResponse<LoginResponse> login(@RequestParam String phoneNumber, String password){
-        return new ApiResponse<>(appService.login(phoneNumber,password), HttpStatus.OK);
+    public LoginResponse login(@RequestParam String phoneNumber, String password){
+        return appService.login(phoneNumber,password);
     }
 }
 // this is checked 28/08/2024  12:20

@@ -30,7 +30,7 @@ public class AdminServiceImpl implements AdminUserService {
         if(adminUser != null){
             return adminUser;
         }else {
-            throw new ApplicationException("Admin not found");
+            return null;
         }
     }
 

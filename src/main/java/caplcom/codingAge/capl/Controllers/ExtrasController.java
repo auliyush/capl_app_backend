@@ -17,8 +17,8 @@ public class ExtrasController {
     private ExtrasService extrasService;
 
     @PostMapping("/create")
-    public ApiResponse<Extras> createExtras(@RequestBody ExtrasRequest extrasRequest) {
-        return new ApiResponse<>(extrasService.createExtras(extrasRequest), HttpStatus.ACCEPTED);
+    public Extras createExtras(@RequestBody ExtrasRequest extrasRequest) {
+        return extrasService.createExtras(extrasRequest);
     }
 //    @GetMapping("/{id}")
 //    Extras getExtrasById(String id) {
@@ -28,8 +28,8 @@ public class ExtrasController {
     // todo think there is no need of get by team id in controller because list of extras already
     //  exists in scoreboard
     @GetMapping("/byScoreBoardId")
-    public ApiResponse<Extras> getExtrasByScoreBoardId(String scoreBoardId) {
-        return new ApiResponse<>(extrasService.getExtrasByScoreBoardId(scoreBoardId), HttpStatus.OK);
+    public Extras getExtrasByScoreBoardId(String scoreBoardId) {
+        return extrasService.getExtrasByScoreBoardId(scoreBoardId);
     }
 
 //    @PutMapping("/update")

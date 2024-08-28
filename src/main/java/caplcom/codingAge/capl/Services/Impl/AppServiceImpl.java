@@ -30,7 +30,7 @@ public class AppServiceImpl implements AppService {
             if(user.getUserPassword().equals(password)){
                 return new LoginResponse(user.getUserId(), "USER");
             }else {
-                throw new ApplicationException("mobile Number or Password Not Matched");
+               return null;
             }
         }
         Player player = playerService.getByPhoneNumber(phoneNumber);
@@ -38,7 +38,7 @@ public class AppServiceImpl implements AppService {
             if(player.getPlayerPassword().equals(password)){
                 return new LoginResponse(player.getPlayerId(), "PLAYER");
             }else {
-                throw new ApplicationException("mobile Number or Password Not Matched");
+                throw null;
             }
         }
         AdminUser adminUser = adminUserService.getAdminByPhoneNumber(phoneNumber);
@@ -46,7 +46,7 @@ public class AppServiceImpl implements AppService {
             if(adminUser.getAdminPassword().equals(password)){
                 return new LoginResponse(adminUser.getAdminId(), "ADMIN");
             }else {
-                throw new ApplicationException("mobile Number or Password Not Matched");
+                throw null;
             }
         }
         return null;
@@ -81,6 +81,6 @@ public class AppServiceImpl implements AppService {
                 return true;
             }
         }
-        throw new ApplicationException("Mobile Number or E-Mail already Exists");
+        return false;
     }
 }

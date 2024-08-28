@@ -32,7 +32,6 @@ public class ExtrasServiceImpl implements ExtrasService {
                 extras.setExtraRun(extras.getExtraRun() + extrasRequest.getExtraRuns());
                 scoreBoard.setExtrasList(extrasList);
                 scoreBoardService.addExtrasRun(extras);
-
                 return extrasRepository.save(extras);
             }
         }
@@ -45,11 +44,7 @@ public class ExtrasServiceImpl implements ExtrasService {
 
     @Override
     public Extras getExtrasById(String id) {
-        Extras extras = (extrasRepository.findById(id)).get();
-        if (extras != null) {
-            return extras;
-        }
-        return new Extras();
+        return extrasRepository.findByIdExtrasId(id);
     }
 
     @Override
@@ -58,7 +53,7 @@ public class ExtrasServiceImpl implements ExtrasService {
         if(extrasList != null) {
             return extrasList;
         }else {
-            throw new ApplicationException("extras not found");
+            return null;
         }
     }
 

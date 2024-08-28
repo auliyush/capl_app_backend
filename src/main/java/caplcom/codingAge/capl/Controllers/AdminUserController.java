@@ -19,8 +19,8 @@ public class AdminUserController {
 //        return adminUserService.createAdmin(userRequest);
 //    }
     @GetMapping("/byId")
-    public ApiResponse<AdminUser> getAdminById(@RequestParam String adminId){
-        return new ApiResponse<>(adminUserService.getAdminUserById(adminId), HttpStatus.OK);
+    public AdminUser getAdminById(@RequestParam String adminId){
+        return adminUserService.getAdminUserById(adminId);
     }
 }
 // this is checked 28/08/2024  12:20
