@@ -39,6 +39,7 @@ public class ExtrasServiceImpl implements ExtrasService {
         extras.setExtraDescription(extrasRequest.getExtraDescription());
         extras.setExtraRun(extrasRequest.getExtraRuns());
         scoreBoard.getExtrasList().add(extras);
+        scoreBoardService.saveUpdates(scoreBoard);
         return extrasRepository.save(extras);
     }
 

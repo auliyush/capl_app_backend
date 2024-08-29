@@ -196,6 +196,11 @@ public class ScoreBoardServiceImpl implements ScoreBoardService {
     }
 
     @Override
+    public ScoreBoard saveUpdates(ScoreBoard scoreBoard) {
+       return scoreBoardRepository.save(scoreBoard);
+    }
+
+    @Override
     public List<ScoreBoard> getListOfScoreBoard() {
         return scoreBoardRepository.findAll();
     }

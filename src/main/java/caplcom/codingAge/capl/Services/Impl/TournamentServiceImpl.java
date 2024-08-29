@@ -48,9 +48,8 @@ public class TournamentServiceImpl implements TournamentService {
             tournament.setStadiumName(tournamentRequest.getStadiumName());
             tournament.setStadiumAddress(tournamentRequest.getStadiumAddress());
             tournament.setCreatorId(tournamentRequest.getCreatorId());
-            Tournament tournament1 = tournamentRepository.save(tournament);
-            seasonService.addTournamentInSeason(tournament1);
-            return tournament1;
+            seasonService.addTournamentInSeason(tournament);
+            return tournamentRepository.save(tournament);
         }
     }
 

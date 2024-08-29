@@ -17,16 +17,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @PostMapping("/signUp")
-//    public User signUp(@RequestBody UserRequest userRequest) {
-//        return userService.createUser(userRequest);
-//    }
-//
-//    @PostMapping("/signIn")
-//    public boolean signIn(@RequestParam String userPhone, String userPassword){
-//        return userService.signIn(userPhone,userPassword);
-//    }
-
     @GetMapping("/getUser/ById")
     public User getUserByUserId(@RequestParam String userId){
         return userService.getUserByUserId(userId);

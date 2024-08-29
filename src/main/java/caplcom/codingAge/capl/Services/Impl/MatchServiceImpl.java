@@ -19,6 +19,9 @@ public class MatchServiceImpl implements MatchService {
     private MatchRepository matchRepository;
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private  SeasonService seasonService;
+
 
     @Override
     public Match createMatch(MatchRequest matchRequest) {
@@ -31,6 +34,7 @@ public class MatchServiceImpl implements MatchService {
                 teamService.saveUpdates(firstTeam);
                 secondTeam.getMatchList().add(match);
                 teamService.saveUpdates(secondTeam);
+                seasonService.addMatchInSeason(match);
                 return matchRepository.save(match);
             }
         }

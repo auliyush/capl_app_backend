@@ -30,4 +30,6 @@ public interface ScoreBoardService {
     ScoreBoard updateBatter(UpdateBatter updateBatter);
 
     List<ScoreBoard> getListOfScoreBoard();
+
+    ScoreBoard saveUpdates(ScoreBoard scoreBoard);
 }

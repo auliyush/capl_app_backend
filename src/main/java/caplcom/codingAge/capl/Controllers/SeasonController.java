@@ -16,8 +16,6 @@ public class SeasonController {
     @Autowired
     private SeasonService seasonService;
 
-
-
     @GetMapping("/season/details/by/seasonYear")
     public Season getSeasonDetailBySeasonYear(@RequestParam String seasonYear) {
         return seasonService.getSeasonBySeasonYear(seasonYear);
