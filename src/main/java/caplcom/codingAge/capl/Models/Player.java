@@ -23,6 +23,7 @@ public class Player{
     private String playerDob;
     private String playerAddress;
     private String playerType;
+    private String playerSubType;
     private Integer jerseyNumber;
     private String economyRate;
     private String strikeRate;

@@ -30,7 +30,7 @@ public class TeamController {
     }
 
     @GetMapping("/getTeamBy/creatorId")
-    public Team getTeamByCreatorId(@RequestParam String creatorId){
+    public List<Team> getTeamByCreatorId(@RequestParam String creatorId){
         return teamService.getTeamByCreatorId(creatorId);
     }
 

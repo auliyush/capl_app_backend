@@ -45,8 +45,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team getTeamByCreatorId(String creatorId) {
-        return teamRepository.findByTeamCreatorId(creatorId);
+    public List<Team> getTeamByCreatorId(String creatorId) {
+        return teamRepository.findAllByTeamCreatorId(creatorId);
     }
     @Override
     public Team updateTeamDetails(UpdateTeamRequest updateTeamRequest) {

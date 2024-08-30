@@ -55,6 +55,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerDob(updatePlayer.getPlayerDob());
         player.setPlayerAddress(updatePlayer.getPlayerAddress());
         player.setPlayerType(updatePlayer.getPlayerType());
+        player.setPlayerSubType(updatePlayer.getPlayerSubType());
         player.setPlayerPassword(updatePlayer.getPlayerPassword());
         return playerRepository.save(player);
     }

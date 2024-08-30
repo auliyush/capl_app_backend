@@ -14,7 +14,7 @@ public interface TeamService {
 
     Team getTeamById(String teamId);
 
-    Team getTeamByCreatorId(String creatorId);
+    List<Team> getTeamByCreatorId(String creatorId);
 
     Team updateTeamDetails(UpdateTeamRequest updateTeamRequest);
 

@@ -18,4 +18,5 @@ public class UpdatePlayer {
     private String playerDob;
     private String playerAddress;
     private String playerType;
+    private String playerSubType;
 }
