@@ -20,7 +20,7 @@ public class Team {
     private String teamCreatorId;
     private String teamName;
     private String teamNickName;
-    private String teamProfilePhotoUrl;
+    private String teamProfilePhotoUrl = "";
     private String teamCaptainId;
     private String teamCoachName;
     private List<Player> playerList = new ArrayList<>();

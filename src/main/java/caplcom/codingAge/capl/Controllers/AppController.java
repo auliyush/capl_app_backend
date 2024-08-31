@@ -1,11 +1,9 @@
 package caplcom.codingAge.capl.Controllers;
 
-import caplcom.codingAge.capl.Base.ApiResponse;
 import caplcom.codingAge.capl.Models.Response.LoginResponse;
 import caplcom.codingAge.capl.Models.request.CreateRequests.SignUpRequest;
 import caplcom.codingAge.capl.Services.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

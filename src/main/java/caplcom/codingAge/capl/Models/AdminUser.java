@@ -17,5 +17,5 @@ public class AdminUser {
     private String adminPhone;
     private String adminEmail;
     private String adminPassword;
-    private String adminProfilePhotoUrl;
+    private String adminProfilePhotoUrl = "";
 }

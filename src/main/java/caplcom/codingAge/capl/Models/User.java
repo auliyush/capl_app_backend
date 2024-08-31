@@ -17,6 +17,6 @@ public class User {
     private String userPhone;
     private String userEmail;
     private String userPassword;
-    private String userProfilePhotoUrl;
+    private String userProfilePhotoUrl = "";
 }
 
