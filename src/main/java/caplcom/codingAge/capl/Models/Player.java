@@ -25,6 +25,7 @@ public class Player{
     private String playerType;
     private String playerSubType;
     private Integer jerseyNumber;
+    private boolean inTeam;
     private String economyRate;
     private String strikeRate;
     private String highestScore;

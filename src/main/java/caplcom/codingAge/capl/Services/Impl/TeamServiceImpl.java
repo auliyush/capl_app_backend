@@ -82,6 +82,7 @@ public class TeamServiceImpl implements TeamService {
                         team.setPlayerList(new ArrayList<>());
                     }
                     team.getPlayerList().add(player);
+                    player.setInTeam(true);
                     teamRepository.save(team);
                 }
             }
@@ -98,6 +99,7 @@ public class TeamServiceImpl implements TeamService {
             for(Player player : playerList){
                 if(player.getPlayerId().equals(playerId)){
                    playerList.remove(player);
+                   player.setInTeam(false);
                    team.setPlayerList(playerList);
                    saveUpdates(team);
                     return true;
