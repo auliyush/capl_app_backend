@@ -81,7 +81,6 @@ public class TeamServiceImpl implements TeamService {
                     if (team.getPlayerList() == null) {
                         team.setPlayerList(new ArrayList<>());
                     }
-                    player.setJerseyNumber(addPlayerRequest.getJerseyNumber());
                     team.getPlayerList().add(player);
                     teamRepository.save(team);
                 }

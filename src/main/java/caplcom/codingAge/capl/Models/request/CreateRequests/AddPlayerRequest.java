@@ -13,5 +13,4 @@ public class AddPlayerRequest {
    private String teamId;
    private List<String> players;
    private String creatorId;
-   private Integer jerseyNumber;
 }
