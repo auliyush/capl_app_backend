@@ -75,16 +75,18 @@ public class TeamServiceImpl implements TeamService {
     public boolean addPlayerInTeam(AddPlayerRequest addPlayerRequest) {
         Team team = getTeamById(addPlayerRequest.getTeamId());
         if(team != null && team.getTeamCreatorId().equals(addPlayerRequest.getCreatorId())){
-            Player player = playerService.getPlayerById(addPlayerRequest.getPlayerId());
-            if(player != null){
-                if (team.getPlayerList() == null) {
-                    team.setPlayerList(new ArrayList<>());
+            for (String playerId : addPlayerRequest.getPlayers()){
+                Player player = playerService.getPlayerById(playerId);
+                if(player != null){
+                    if (team.getPlayerList() == null) {
+                        team.setPlayerList(new ArrayList<>());
+                    }
+                    player.setJerseyNumber(addPlayerRequest.getJerseyNumber());
+                    team.getPlayerList().add(player);
+                    teamRepository.save(team);
                 }
-                player.setJerseyNumber(addPlayerRequest.getJerseyNumber());
-                team.getPlayerList().add(player);
-                teamRepository.save(team);
-                return true;
             }
+            return true;
         }
         return false;
     }
