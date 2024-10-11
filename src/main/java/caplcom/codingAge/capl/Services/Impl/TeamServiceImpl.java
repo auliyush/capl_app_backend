@@ -84,6 +84,7 @@ public class TeamServiceImpl implements TeamService {
                     team.getPlayerList().add(player);
                     player.setInTeam(true);
                     teamRepository.save(team);
+                    playerService.saveUpdates(player);
                 }
             }
             return true;
