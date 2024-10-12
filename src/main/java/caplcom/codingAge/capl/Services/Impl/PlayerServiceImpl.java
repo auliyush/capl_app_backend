@@ -43,8 +43,11 @@ public class PlayerServiceImpl implements PlayerService {
         if(player == null){
             return null;
         }
-        if(getByPhoneNumber(updatePlayer.getPlayerPhone()) != null &&
-                getByEmail(updatePlayer.getPlayerEmail()) != null){
+
+        if(!getByPhoneNumber(updatePlayer.getPlayerPhone()).getPlayerId().equals(updatePlayer.getPlayerId())){
+            return null;
+        }
+        if(!getByEmail(updatePlayer.getPlayerEmail()).getPlayerId().equals(updatePlayer.getPlayerId())){
             return null;
         }
         player.setPlayerProfilePhotoUrl(updatePlayer.getPlayerProfilePhotoUrl());
