@@ -26,15 +26,15 @@ public class Player{
     private String playerSubType = "";
     private Integer jerseyNumber;
     private boolean inTeam;
-    private String economyRate;
-    private String strikeRate;
-    private String highestScore;
-    private String totalHalfCentury;
-    private String totalFullCentury;
-    private String playerAverage;
-    private String totalMatches;
-    private String totalBalls;
-    private String totalRuns;
+    private float economyRate;
+    private float strikeRate;
+    private int highestScore;
+    private int totalHalfCentury;
+    private int totalFullCentury;
+    private float playerAverage;
+    private int totalMatches;
+    private int totalBalls;
+    private int totalRuns;
     private int totalFours;
     private int totalSixes;
     // List of stats and list of wicket
