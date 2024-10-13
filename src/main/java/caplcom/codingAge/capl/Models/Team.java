@@ -23,6 +23,7 @@ public class Team {
     private String teamProfilePhotoUrl = "";
     private String teamCaptainId;
     private String teamCoachName;
+    private boolean inTournament;
     private List<Player> playerList = new ArrayList<>();
     private List<Match> matchList = new ArrayList<>();
     // here we need List<TeamStats>

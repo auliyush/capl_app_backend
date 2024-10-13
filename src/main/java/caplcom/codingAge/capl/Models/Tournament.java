@@ -22,7 +22,7 @@ public class Tournament {
     private String tournamentId;
     private String tournamentName;
     private String seasonYear;
-    private String creatorId;
+    private String tournamentCreatorId;
     private String highestScoreBatterId;
     private String highestScoreBowlerId;
     private String winnerTeam;

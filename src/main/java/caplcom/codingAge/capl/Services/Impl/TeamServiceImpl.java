@@ -5,6 +5,7 @@ import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
 import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
+import caplcom.codingAge.capl.Models.request.DeleteRequest.RemovePlayerRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Repositories.TeamRepository;
 import caplcom.codingAge.capl.Services.AdminUserService;
@@ -93,20 +94,22 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean removePlayerFromTeam(String teamId, String playerId, String creatorId) {
-        Team team = getTeamById(teamId);
-        if(team != null && team.getTeamCreatorId().equals(creatorId)){
-            List<Player> playerList = getListOfPlayers(teamId);
-            for(Player player : playerList){
-                if(player.getPlayerId().equals(playerId)){
-                   playerList.remove(player);
-                   player.setInTeam(false);
-                   team.setPlayerList(playerList);
-                   saveUpdates(team);
-                    return true;
+    public boolean removePlayerFromTeam(RemovePlayerRequest removePlayerRequest) {
+        Team team = getTeamById(removePlayerRequest.getTeamId());
+        if(team != null && team.getTeamCreatorId().equals(removePlayerRequest.getCreatorId())){
+            for (String playerId : removePlayerRequest.getPlayersId()){
+                Player player = playerService.getPlayerById(playerId);
+                if(player != null){
+                    if (team.getPlayerList() == null) {
+                        team.setPlayerList(new ArrayList<>());
+                    }
+                    team.getPlayerList().remove(player);
+                    player.setInTeam(false);
+                    teamRepository.save(team);
+                    playerService.saveUpdates(player);
                 }
-                // why player not remove this api will not work properly
             }
+            return true;
         }
         return false;
     }

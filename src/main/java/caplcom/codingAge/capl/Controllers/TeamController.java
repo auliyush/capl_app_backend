@@ -4,6 +4,8 @@ import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
 import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
+import caplcom.codingAge.capl.Models.request.DeleteRequest.RemovePlayerRequest;
+import caplcom.codingAge.capl.Models.request.DeleteRequest.RemoveTeamRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 import caplcom.codingAge.capl.Services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +50,8 @@ public class TeamController {
         return teamService.addPlayerInTeam(addPlayerRequest);
     }
     @PutMapping("/remove/player")
-    public boolean removePlayerFromTeam(@RequestParam String teamId, String playerId, String creatorId){
-     return teamService.removePlayerFromTeam(teamId, playerId, creatorId);
+    public boolean removePlayerFromTeam(@RequestBody RemovePlayerRequest removePlayerRequest){
+     return teamService.removePlayerFromTeam(removePlayerRequest);
     }
 
     @GetMapping("listOf/player/ByRole/from/Team")

@@ -5,6 +5,7 @@ import caplcom.codingAge.capl.Models.Player;
 import caplcom.codingAge.capl.Models.Team;
 import caplcom.codingAge.capl.Models.request.CreateRequests.AddPlayerRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamRequest;
+import caplcom.codingAge.capl.Models.request.DeleteRequest.RemovePlayerRequest;
 import caplcom.codingAge.capl.Models.request.UpdateRequests.UpdateTeamRequest;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public interface TeamService {
 
     List<Team> getListOfTeam();
 
-    boolean removePlayerFromTeam(String teamId, String playerId, String creatorId);
+    boolean removePlayerFromTeam(RemovePlayerRequest removePlayerRequest);
 
     Player getPlayerByJerseyNumber(Integer newBowlerJerseyNumber, String teamId);
 

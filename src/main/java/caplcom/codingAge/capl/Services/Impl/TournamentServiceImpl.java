@@ -1,12 +1,11 @@
 package caplcom.codingAge.capl.Services.Impl;
 
-import caplcom.codingAge.capl.Models.AdminUser;
+import caplcom.codingAge.capl.Models.*;
 
-import caplcom.codingAge.capl.Models.Team;
-import caplcom.codingAge.capl.Models.TeamStats;
-import caplcom.codingAge.capl.Models.Tournament;
+import caplcom.codingAge.capl.Models.request.CreateRequests.AddTeamRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TeamStatsRequest;
 import caplcom.codingAge.capl.Models.request.CreateRequests.TournamentRequest;
+import caplcom.codingAge.capl.Models.request.DeleteRequest.RemoveTeamRequest;
 import caplcom.codingAge.capl.Repositories.TournamentRepository;
 import caplcom.codingAge.capl.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class TournamentServiceImpl implements TournamentService {
             tournament.setSeasonYear(tournamentRequest.getSeasonYear());
             tournament.setStadiumName(tournamentRequest.getStadiumName());
             tournament.setStadiumAddress(tournamentRequest.getStadiumAddress());
-            tournament.setCreatorId(tournamentRequest.getCreatorId());
+            tournament.setTournamentCreatorId(tournamentRequest.getCreatorId());
             seasonService.addTournamentInSeason(tournament);
             return tournamentRepository.save(tournament);
         }
@@ -58,49 +57,50 @@ public class TournamentServiceImpl implements TournamentService {
         return tournamentRepository.findByTournamentId(tournamentId);
     }
 
-
     @Override
-    public Tournament addTeamsInTournament(String tournamentId, String teamId) {
-        Tournament tournament = findByTournamentId(tournamentId);
-
+    public boolean addTeamsInTournament(AddTeamRequest addTeamRequest) {
+        Tournament tournament = findByTournamentId(addTeamRequest.getTournamentId());
         if (tournament != null) {
-            Team team = teamService.getTeamById(teamId);
-            Team team1 = null;
-            for (Team team2 : tournament.getTeamList()) {
-                if (teamId.equals(team2.getTeamId())) {
-                    team1 = team2;
-                    break;
+            if (tournament.getTournamentCreatorId().equals(addTeamRequest.getTournamentCreatorId())) {
+                for (String teamId : addTeamRequest.getTeamsId()) {
+                    Team team = teamService.getTeamById(teamId);
+                    if (team != null) {
+                        if (tournament.getTeamList() == null) {
+                            tournament.setTeamList(new ArrayList<>());
+                        }
+                        tournament.getTeamList().add(team);
+                        team.setInTournament(true);
+                        teamService.saveUpdates(team);
+                        tournamentRepository.save(tournament);
+                    }
                 }
+                return true;
             }
-
-            if (team != null && team1 == null) {
-                TeamStatsRequest teamStatsRequest = new TeamStatsRequest(teamId,tournamentId);
-                TeamStats teamStats = teamStatsService.createMatchTeamStats(teamStatsRequest);
-                tournament.getTeamStatsList().add(teamStats);
-                tournament.getTeamList().add(team);
-                return tournamentRepository.save(tournament);
-            }
+            return false;
         }
-        return new Tournament();
+        return false;
     }
 
     @Override
-    public boolean removeTeamFromTournament(String tournamentId, String teamId) {
-        Tournament tournament = findByTournamentId(tournamentId);
+    public boolean removeTeamFromTournament(RemoveTeamRequest removeTeamRequest) {
+        Tournament tournament = findByTournamentId(removeTeamRequest.getTournamentId());
         if (tournament != null) {
-            List<Team> teamList = tournament.getTeamList();
-            for (int i = 0; i < teamList.size(); i++) {
-                Team team = teamList.get(i);
-                if (team.getTeamId().equals(teamId)) {
-                    List<TeamStats> teamStats = tournament.getTeamStatsList();
-                    teamList.remove(team);
-                    teamStats.remove(teamStats.get(i));
-                    tournament.setTeamList(teamList);
-                    tournament.setTeamStatsList(teamStats);
-                    tournamentRepository.save(tournament);
-                    return true;
+            if (tournament.getTournamentCreatorId().equals(removeTeamRequest.getTournamentCreatorId())) {
+                for (String teamId : removeTeamRequest.getTeamsId()) {
+                    Team team = teamService.getTeamById(teamId);
+                    if (team != null) {
+                        if (tournament.getTeamList() == null) {
+                            tournament.setTeamList(new ArrayList<>());
+                        }
+                        tournament.getTeamList().remove(team);
+                        team.setInTournament(false);
+                        teamService.saveUpdates(team);
+                        tournamentRepository.save(tournament);
+                    }
                 }
+                return true;
             }
+            return false;
         }
         return false;
     }
@@ -114,4 +114,8 @@ public class TournamentServiceImpl implements TournamentService {
         return new ArrayList<>();
     }
 
+    @Override
+    public List<Tournament> getListOfTournament() {
+        return tournamentRepository.findAll();
+    }
 }
