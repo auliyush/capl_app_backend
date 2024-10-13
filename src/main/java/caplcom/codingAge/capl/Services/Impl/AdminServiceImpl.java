@@ -1,6 +1,4 @@
 package caplcom.codingAge.capl.Services.Impl;
-
-import caplcom.codingAge.capl.Exception.ApplicationException;
 import caplcom.codingAge.capl.Models.AdminUser;
 import caplcom.codingAge.capl.Models.request.CreateRequests.UserRequest;
 import caplcom.codingAge.capl.Repositories.AdminUserRepository;
