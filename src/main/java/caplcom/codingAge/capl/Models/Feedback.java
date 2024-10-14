@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import java.sql.Time;
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,5 +17,7 @@ public class Feedback {
     @Id
     private String id;
     private String userId;
+    private Date feedbackSubmitDate;
+    private Time feedbackSubmitTime;
     private String feedbackDescription;
 }
