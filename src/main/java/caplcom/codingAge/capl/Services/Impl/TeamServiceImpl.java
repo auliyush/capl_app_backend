@@ -34,7 +34,7 @@ public class TeamServiceImpl implements TeamService {
             team.setTeamName(teamRequest.getTeamName());
             team.setTeamNickName(teamRequest.getTeamNickName());
             team.setTeamProfilePhotoUrl(teamRequest.getTeamProfilePhotoUrl());
-
+            team.setActive(true);
             return teamRepository.save(team);
         }
         return null;
@@ -145,7 +145,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> getListOfTeam() {
-        return teamRepository.findAll();
+        return teamRepository.findAllByIsActive(true);
     }
 
     @Override

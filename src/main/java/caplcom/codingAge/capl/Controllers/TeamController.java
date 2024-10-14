@@ -41,7 +41,7 @@ public class TeamController {
         return teamService.updateTeamDetails(updateTeamRequest);
     }
     @DeleteMapping("/delete/team/by/teamId")
-    public boolean removeTeamByTeamId(String teamId , String teamCreatorId) {
+    public boolean removeTeamByTeamId(@RequestParam String teamId , String teamCreatorId) {
         return teamService.removeTeamByTeamId(teamId, teamCreatorId);
     }
     @GetMapping("/list/ofPlayers")

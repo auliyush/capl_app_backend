@@ -11,4 +11,7 @@ public interface TeamRepository extends MongoRepository<Team, String> {
     Team findByTeamId(String teamId);
 
     List<Team> findAllByTeamCreatorId(String creatorId);
+
+    List<Team> findAllByIsActive(boolean value);
+
 }
