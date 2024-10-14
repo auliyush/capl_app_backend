@@ -65,6 +65,24 @@ public class TeamServiceImpl implements TeamService {
         return null;
     }
     @Override
+    public boolean removeTeamByTeamId(String teamId, String teamCreatorId) {
+        Team team = teamRepository.findByTeamId(teamId);
+        if(team == null) {
+            return false;
+        } else if (!team.getTeamCreatorId().equals(teamCreatorId)) {
+            return  false;
+        }
+        else {
+            for(Player player : team.getPlayerList()) {
+                player.setInTeam(false);
+                playerService.saveUpdates(player);
+            }
+            team.setActive(false);
+            teamRepository.save(team);
+            return true;
+        }
+    }
+    @Override
     public List<Player> getListOfPlayers(String teamId) {
         if(getTeamById(teamId) != null){
             return getTeamById(teamId).getPlayerList();

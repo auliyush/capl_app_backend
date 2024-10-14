@@ -19,6 +19,8 @@ public interface TeamService {
 
     Team updateTeamDetails(UpdateTeamRequest updateTeamRequest);
 
+    boolean removeTeamByTeamId(String teamId, String teamCreatorId);
+
     List<Player> getListOfPlayers(String teamId);
 
     boolean addPlayerInTeam(AddPlayerRequest addPlayerRequest);

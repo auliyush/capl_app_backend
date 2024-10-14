@@ -40,6 +40,10 @@ public class TeamController {
     public Team updateTeamDetails(@RequestBody UpdateTeamRequest updateTeamRequest){
         return teamService.updateTeamDetails(updateTeamRequest);
     }
+    @DeleteMapping("/delete/team/by/teamId")
+    public boolean removeTeamByTeamId(String teamId , String teamCreatorId) {
+        return teamService.removeTeamByTeamId(teamId, teamCreatorId);
+    }
     @GetMapping("/list/ofPlayers")
     public List<Player> getListOfPlayers(@RequestParam String teamId){
         return teamService.getListOfPlayers(teamId);

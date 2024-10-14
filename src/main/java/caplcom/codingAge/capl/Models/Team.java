@@ -22,6 +22,7 @@ public class Team {
     private String teamNickName;
     private String teamProfilePhotoUrl = "";
     private String teamCaptainId;
+    private boolean isActive;
     private String teamCoachName;
     private boolean inTournament;
     private List<Player> playerList = new ArrayList<>();
