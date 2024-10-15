@@ -17,7 +17,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     public Feedback createFeedback(FeedbackRequest feedbackRequest) {
         Feedback feedback=new Feedback();
         feedback.setUserId(feedbackRequest.getUserId());
-        feedback.setFeedbackSubmitTime(feedbackRequest.getFeedbackSubmitTime());
         feedback.setFeedbackSubmitDate(feedbackRequest.getFeedbackSubmitDate());
         feedback.setFeedbackDescription(feedbackRequest.getFeedbackDescription());
         return feedbackRepository.save(feedback);

@@ -18,6 +18,5 @@ public class Feedback {
     private String id;
     private String userId;
     private Date feedbackSubmitDate;
-    private Time feedbackSubmitTime;
     private String feedbackDescription;
 }

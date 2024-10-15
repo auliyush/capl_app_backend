@@ -15,6 +15,5 @@ import java.util.Date;
 public class FeedbackRequest {
     private String userId;
     private Date feedbackSubmitDate;
-    private Time feedbackSubmitTime;
     private String feedbackDescription;
 }
