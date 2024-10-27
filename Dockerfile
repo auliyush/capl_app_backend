@@ -16,4 +16,4 @@ EXPOSE 8080
 ENV MONGODB_URI="mongodb+srv://Capl_db:Forgot%40123@capl-codingage.irezg.mongodb.net/capl?retryWrites=true&w=majority&appName=CAPL-CodingAge"
 
 # Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "capl.jar"]
