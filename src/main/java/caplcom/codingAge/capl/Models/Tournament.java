@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Document(collection = "Tournament")
 public class Tournament {
     @Id
@@ -31,5 +30,11 @@ public class Tournament {
     private String stadiumName;
     private String stadiumAddress;
     private List<TeamStats> teamStatsList;
-    private List<Team> teamList = new ArrayList<>();
+    private List<Team> teamList;
+
+    public Tournament(){
+        super();
+        this.teamList = new ArrayList<>();
+        this.teamStatsList = new ArrayList<>();
+    }
 }

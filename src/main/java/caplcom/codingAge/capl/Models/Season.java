@@ -14,13 +14,19 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Season {
     @Id
     private String seasonId;
     private String seasonYear;
-    private List<Tournament> tournamentList = new ArrayList<>();
-    private List<BatterStat> batterStatList = new ArrayList<>();
-    private List<BowlerStat> bowlerStatList = new ArrayList<>();
-    private List<Match> matchList =new ArrayList<>();
+    private List<Tournament> tournamentList;
+    private List<BatterStat> batterStatList;
+    private List<BowlerStat> bowlerStatList;
+    private List<Match> matchList;
+
+    public Season(){
+        this.tournamentList = new ArrayList<>();
+        this.bowlerStatList = new ArrayList<>();
+        this.batterStatList = new ArrayList<>();
+        this.matchList = new ArrayList<>();
+    }
 }

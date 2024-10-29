@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/season/details")
+@RequestMapping ("/season")
 @CrossOrigin(origins = "*")
 public class SeasonController {
 
     @Autowired
     private SeasonService seasonService;
 
-    @GetMapping("/season/details/by/seasonYear")
+    @GetMapping("/details/by/seasonYear")
     public Season getSeasonDetailBySeasonYear(@RequestParam String seasonYear) {
         return seasonService.getSeasonBySeasonYear(seasonYear);
     }
 
-    @GetMapping("/season/ListOf/TournamentBy/seasonYear")
+    @GetMapping("/ListOf/TournamentBy/seasonYear")
     public List<Tournament> getListOfTournamentBySeasonYear(@RequestParam String seasonYear) {
         return seasonService.getListOfTournamentBySeasonYear(seasonYear);
     }
-    @GetMapping("/season/ListOf/season/seasonId")
+    @GetMapping("/ListOf/season/")
     public  List<Season> getListOfSeason()
     {
         return seasonService.getListOfSeason();

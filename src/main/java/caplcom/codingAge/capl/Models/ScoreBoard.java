@@ -12,7 +12,6 @@ import java.util.List;
 @Document(collection ="Scoreboard")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ScoreBoard {
 
     @Id
@@ -27,10 +26,13 @@ public class ScoreBoard {
     private int totalWickets;
     private double overs;
     private int noOfWickets;
-    private List <BatterStat> batterStatList = new ArrayList<>();
-    private List <BowlerStat> bowlerStatList = new ArrayList<>();
-    private List <Extras> extrasList=new ArrayList<>();
+    private List <BatterStat> batterStatList;
+    private List <BowlerStat> bowlerStatList;
+    private List <Extras> extrasList;
 
-
-
+    public ScoreBoard(){
+        this.extrasList = new ArrayList<>();
+        this.bowlerStatList = new ArrayList<>();
+        this.batterStatList = new ArrayList<>();
+    }
 }

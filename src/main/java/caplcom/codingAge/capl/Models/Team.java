@@ -13,7 +13,6 @@ import java.util.List;
 @Document(collection ="Teams")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Team {
     @Id
     private String teamId;
@@ -25,9 +24,13 @@ public class Team {
     private boolean isActive;
     private String teamCoachName;
     private boolean inTournament;
-    private List<Player> playerList = new ArrayList<>();
-    private List<Match> matchList = new ArrayList<>();
+    private List<Player> playerList;
+    private List<Match> matchList;
     // here we need List<TeamStats>
 
+    public Team(){
+        this.playerList = new ArrayList<>();
+        this.matchList = new ArrayList<>();
+    }
 
 }

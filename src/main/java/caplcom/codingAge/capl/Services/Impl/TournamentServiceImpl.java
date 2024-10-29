@@ -65,9 +65,6 @@ public class TournamentServiceImpl implements TournamentService {
                 for (String teamId : addTeamRequest.getTeamsId()) {
                     Team team = teamService.getTeamById(teamId);
                     if (team != null) {
-                        if (tournament.getTeamList() == null) {
-                            tournament.setTeamList(new ArrayList<>());
-                        }
                         tournament.getTeamList().add(team);
                         team.setInTournament(true);
                         teamService.saveUpdates(team);
@@ -89,9 +86,6 @@ public class TournamentServiceImpl implements TournamentService {
                 for (String teamId : removeTeamRequest.getTeamsId()) {
                     Team team = teamService.getTeamById(teamId);
                     if (team != null) {
-                        if (tournament.getTeamList() == null) {
-                            tournament.setTeamList(new ArrayList<>());
-                        }
                         tournament.getTeamList().remove(team);
                         team.setInTournament(false);
                         teamService.saveUpdates(team);

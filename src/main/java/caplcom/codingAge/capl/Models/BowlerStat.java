@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @Document(collection ="BowlerStats")
 @AllArgsConstructor
-@NoArgsConstructor
 public class BowlerStat {
     @Id
     private String statId;
@@ -26,5 +25,9 @@ public class BowlerStat {
     private int totalFours;
     private int totalSix;
     private double economyRate;
-    private List<Wicket> wicketsList = new ArrayList<>();
+    private List<Wicket> wicketsList;
+
+    public BowlerStat(){
+        this.wicketsList = new ArrayList<>();
+    }
 }

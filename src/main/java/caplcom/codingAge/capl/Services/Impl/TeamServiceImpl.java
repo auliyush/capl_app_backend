@@ -97,9 +97,6 @@ public class TeamServiceImpl implements TeamService {
             for (String playerId : addPlayerRequest.getPlayers()){
                 Player player = playerService.getPlayerById(playerId);
                 if(player != null){
-                    if (team.getPlayerList() == null) {
-                        team.setPlayerList(new ArrayList<>());
-                    }
                     team.getPlayerList().add(player);
                     player.setInTeam(true);
                     teamRepository.save(team);
@@ -118,9 +115,6 @@ public class TeamServiceImpl implements TeamService {
             for (String playerId : removePlayerRequest.getPlayersId()){
                 Player player = playerService.getPlayerById(playerId);
                 if(player != null){
-                    if (team.getPlayerList() == null) {
-                        team.setPlayerList(new ArrayList<>());
-                    }
                     team.getPlayerList().remove(player);
                     player.setInTeam(false);
                     teamRepository.save(team);

@@ -8,6 +8,7 @@ import caplcom.codingAge.capl.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -41,7 +42,7 @@ public class MatchServiceImpl implements MatchService {
         return null;
     }
 // this is static method only for create match
-    private static Match getMatch(MatchRequest matchRequest) {
+    private Match getMatch(MatchRequest matchRequest) {
         Match match = new Match();
         match.setCreatorId(matchRequest.getCreatorId());
         match.setTournamentId(matchRequest.getTournamentId());
@@ -50,6 +51,8 @@ public class MatchServiceImpl implements MatchService {
         match.setMatchDate(matchRequest.getMatchDate());
         match.setMatchTime(matchRequest.getMatchTime());
         match.setOvers(matchRequest.getOvers());
+        match.setTossWonTeamId(matchRequest.getTossWonTeamId());
+        match.setSelectionOfTossWinningTeam(matchRequest.getSelectionOfTossWinningTeam());
         match.setMatchStatus(true);
         return match;
     }
