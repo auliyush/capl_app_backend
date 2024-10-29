@@ -27,6 +27,7 @@ public class TeamServiceImpl implements TeamService {
     private PlayerService playerService;
     @Autowired
     private AdminUserService adminUserService;
+
     public Team createTeam(TeamRequest teamRequest) {
         if(adminUserService.getAdminUserById(teamRequest.getTeamCreatorId()) != null){
             Team team = new Team();
@@ -126,6 +127,7 @@ public class TeamServiceImpl implements TeamService {
         return false;
     }
 
+    /// this is unused api method
     @Override
     public Player getPlayerByJerseyNumber(Integer newBowlerJerseyNumber, String teamId) {
         List<Player> playerList = getListOfPlayers(teamId);

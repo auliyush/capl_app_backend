@@ -21,4 +21,6 @@ public interface SeasonService {
     List<Season> getListOfSeason();
 
     List<Tournament> getListOfTournamentBySeasonYear(String seasonYear);
+
+    void saveUpdates(Season seasonBySeasonYear);
 }
