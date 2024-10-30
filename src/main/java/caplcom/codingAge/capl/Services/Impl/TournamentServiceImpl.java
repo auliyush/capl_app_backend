@@ -76,11 +76,13 @@ public class TournamentServiceImpl implements TournamentService {
         return false;
     }
 
+    // todo this api not working properly
     @Override
     public boolean removeTeamFromTournament(RemoveTeamRequest removeTeamRequest) {
         Tournament tournament = findByTournamentId(removeTeamRequest.getTournamentId());
         if (tournament != null) {
             if (tournament.getTournamentCreatorId().equals(removeTeamRequest.getTournamentCreatorId())) {
+                // Iterate through each team ID in the request
                 for (String teamId : removeTeamRequest.getTeamsId()) {
                     Team team = teamService.getTeamById(teamId);
                     if (team != null) {
@@ -91,12 +93,17 @@ public class TournamentServiceImpl implements TournamentService {
                         seasonService.saveUpdates(seasonService.getSeasonBySeasonYear(tournament.getSeasonYear()));
                     }
                 }
+
+                // Save tournament and season updates after all teams are removed
+
+
+                // Return true only if all specified teams were processed
                 return true;
             }
-            return false;
         }
-        return false;
+        return false;  // Return false if tournament or creator ID doesn't match
     }
+
 
     @Override
     public List<Team> getListOfTeamsOfTournament(String tournamentId) {

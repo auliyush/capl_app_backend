@@ -13,7 +13,7 @@ EXPOSE 8080
 
 # Set the MongoDB URI environment variable
 # Render or Docker environment will need to provide this value securely
-ENV MONGODB_URI="mongodb+srv://Capl_db:Forgot%40123@capl-codingage.irezg.mongodb.net/capl?retryWrites=true&w=majority&appName=CAPL-CodingAge"
+# ENV MONGODB_URI="mongodb+srv://Capl_db:Forgot%40123@capl-codingage.irezg.mongodb.net/capl?retryWrites=true&w=majority&appName=CAPL-CodingAge"
 
 # Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "capl.jar"]

@@ -26,7 +26,6 @@ public class BowlerStat {
     private int totalSix;
     private double economyRate;
     private List<Wicket> wicketsList;
-
     public BowlerStat(){
         this.wicketsList = new ArrayList<>();
     }

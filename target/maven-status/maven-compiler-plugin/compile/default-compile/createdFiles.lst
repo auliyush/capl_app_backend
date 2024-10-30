@@ -56,6 +56,7 @@ caplcom/codingAge/capl/Models/request/DeleteRequest/RemoveTeamRequest.class
 caplcom/codingAge/capl/CaplApplication.class
 caplcom/codingAge/capl/Services/Impl/AppServiceImpl.class
 caplcom/codingAge/capl/Controllers/PlayerController.class
+caplcom/codingAge/capl/Utility/UtilityClassService.class
 caplcom/codingAge/capl/Controllers/ExceptionController.class
 caplcom/codingAge/capl/Services/Impl/PlayerServiceImpl.class
 caplcom/codingAge/capl/Models/request/CreateRequests/FeedbackRequest.class
