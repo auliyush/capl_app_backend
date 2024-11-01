@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # Set the working directory inside the container
-WORKDIR /capl_app_backend
+WORKDIR /src/main/java/caplcom/codingAge/capl
 
 # Copy the JAR file built from your Spring Boot application
 # Replace 'your-app.jar' with the actual name of the JAR file in the target directory
